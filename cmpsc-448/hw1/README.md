@@ -85,7 +85,7 @@ across PyTorch versions and platforms.
 implementation decisions, and lessons. It includes [results.png](results.png),
 a browser screenshot of the script's captured output.
 
-Review the report before submitting. PDF export remains pending. To export
+The PDF is [report.pdf](report.pdf). Review it before submitting. To rebuild
 with Pandoc and Tectonic installed, run from this directory:
 
 ```sh
