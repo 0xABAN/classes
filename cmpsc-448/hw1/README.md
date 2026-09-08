@@ -79,13 +79,15 @@ across PyTorch versions and platforms.
   are simplifications. High accuracy here is not evidence of road safety or
   performance on real sensor data.
 
-The script checks finite loss, accuracy above 75%, and confusion-matrix row
-counts. Run it again to exercise these checks.
+## Report
 
-## Before submitting
+[report.md](report.md) covers the problem, data, model, measured results,
+implementation decisions, and lessons. It includes [results.png](results.png),
+a browser screenshot of the script's captured output.
 
-The assignment requires a **PDF report**, including a **performance
-screenshot**, challenges encountered and how they were addressed, and personal
-lessons learned. This README is a technical starting point, not the final PDF.
-Capture the terminal output from your own run and add your own account of the
-work before exporting the report.
+Review the report before submitting. PDF export remains pending. To export
+with Pandoc and Tectonic installed, run from this directory:
+
+```sh
+pandoc report.md --pdf-engine=tectonic -o report.pdf
+```
