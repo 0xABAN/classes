@@ -23,9 +23,8 @@ LOW, HIGH = torch.tensor(list(RANGES.values())).unbind(-1)
 def make_data(per_class, generator):
     """Draw independent uniform features per class; return shuffled examples."""
     labels = torch.arange(len(CLASSES)).repeat_interleave(per_class)
-    features = LOW[labels] + torch.rand(
-        len(labels), 3, generator=generator
-    ) * (HIGH - LOW)[labels]
+    offsets = torch.rand(len(labels), 3, generator=generator) * (HIGH - LOW)[labels]
+    features = LOW[labels] + offsets
     order = torch.randperm(len(labels), generator=generator)
     return features[order], labels[order]
 
