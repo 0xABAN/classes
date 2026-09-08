@@ -10,10 +10,14 @@ Run with: uv run main.py
 import torch
 from torch import nn
 
-CLASSES = ("pedestrian", "bicycle", "car")
-# Each row gives uniform bounds for width (m), height (m), speed (m/s).
-LOW = torch.tensor([[0.3, 1.2, 0.0], [0.4, 1.0, 1.0], [1.4, 1.2, 0.0]])
-HIGH = torch.tensor([[0.9, 2.0, 3.0], [1.0, 1.9, 10.0], [2.2, 2.0, 25.0]])
+RANGES = {
+    #              width (m)  height (m)  speed (m/s)
+    "pedestrian": ((0.3, 0.9), (1.2, 2.0), (0.0, 3.0)),
+    "bicycle":    ((0.4, 1.0), (1.0, 1.9), (1.0, 10.0)),
+    "car":        ((1.4, 2.2), (1.2, 2.0), (0.0, 25.0)),
+}
+CLASSES = tuple(RANGES)
+LOW, HIGH = torch.tensor(list(RANGES.values())).unbind(-1)
 
 
 def make_data(per_class, generator):
