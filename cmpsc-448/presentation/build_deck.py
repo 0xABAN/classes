@@ -94,20 +94,15 @@ def gradient():
     return stream
 
 
-def base(prs, n, section, title, subtitle=None, field=False):
+def base(prs, n, title, field=False):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     slide.background.fill.solid()
     slide.background.fill.fore_color.rgb = RGBColor.from_string(PAPER)
     if field:
         slide.shapes.add_picture(gradient(), Inches(12.87), Inches(.22), Inches(.24), Inches(7.06))
-    text(slide, "CMPSC 448   /   BIAS–VARIANCE", .62, .35, 8, .25, 11, MUTED)
-    text(slide, section.upper(), .64, 1.05, 11, .3, 12, MUTED)
-    text(slide, title, .62, 1.49, 12, .8, 38)
-    if subtitle:
-        text(slide, subtitle, .65, 2.32, 11.9, .52, 19, MUTED)
+    text(slide, title, .62, 1.05, 12, .8, 38)
     line(slide, .65, 7.02, 12.65, 7.02)
-    text(slide, "THE BIAS–VARIANCE TRADEOFF", .65, 7.15, 8, .18, 9, MUTED)
-    text(slide, f"{n:02d} / 08", 11.94, 7.12, .75, .22, 11, MUTED)
+    text(slide, f"{n:02d}/08", 11.94, 7.12, .75, .22, 11, MUTED)
     return slide
 
 
@@ -182,8 +177,7 @@ def build():
     g = np.linspace(-1, 1, 260)
     two = [(1.02, 3.36, 5.00, 2.57), (7.12, 3.36, 5.00, 2.57)]
 
-    s = base(prs, 1, "Start with a prediction", "Which model would you trust?",
-             "Two different datasets. Two ways a fit can go wrong.", field=True)
+    s = base(prs, 1, "Which model would you trust?", field=True)
     text(s, "A   /   A straight fit", 1.02, 2.99, 5, .3, 16)
     text(s, "B   /   A very flexible fit", 7.12, 2.99, 5, .3, 16)
     plot(s, two[0], [(g, models[0](g), ORANGE, False, 3)], [(x, y, INK, False)])
@@ -191,7 +185,7 @@ def build():
     legend(s, [("training observations", INK, "dot"), ("fitted model", ORANGE, "line")])
     note(s, "Ask: Which fit looks convincing, and which would predict new observations well? Pause before naming the concepts. These are two different synthetic regression problems, not competing fits to identical data. A has an underlying quadratic relationship; B has an underlying straight relationship with noisy observations. All examples use x in [-1, 1], independent Gaussian noise with standard deviation 0.16, and arbitrary units. Curves and dots are editable vector objects.")
 
-    s = base(prs, 2, "Example A  /  underfitting", "Too simple to learn the pattern.")
+    s = base(prs, 2, "Too simple to learn the pattern.")
     plot(s, (.98, 2.94, 7.12, 3.10),
          [(g, truth(g), PURPLE, True, 2), (g, models[0](g), ORANGE, False, 3)],
          [(x, y, INK, False)])
@@ -200,7 +194,7 @@ def build():
     legend(s, [("training data", INK, "dot"), ("linear fit", ORANGE, "line"), ("true pattern", PURPLE, "dash")])
     note(s, "Bias is the systematic difference between the average prediction over repeated training samples and the true regression function. Here the model family only permits straight lines, so even its average fit cannot capture curvature. The dashed curve is known because we generated this example; in practice it is hidden. Underfitting usually leaves substantial error even on training data. More samples alone will not make a straight model quadratic. Linear regression can also use polynomial features: it is the straight-line specification here that is restrictive.")
 
-    s = base(prs, 3, "Example B  /  overfitting", "Flexible enough to learn the noise.")
+    s = base(prs, 3, "Flexible enough to learn the noise.")
     plot(s, (.98, 2.94, 7.12, 3.10),
          [(g, linear_truth(g), PURPLE, True, 2), (g, flexible(g), ORANGE, False, 3)],
          [(xl, yl, INK, False)])
@@ -209,8 +203,7 @@ def build():
     legend(s, [("training data", INK, "dot"), ("degree-11 fit", ORANGE, "line"), ("true pattern", PURPLE, "dash")])
     note(s, "The true relationship in B is linear. A degree-11 polynomial fitted to 14 noisy observations nearly follows every training point, but introduces unsupported wiggles. Variance means variability of model predictions across possible training datasets, not variability of the input data and not simply a curve looking wiggly. One fit suggests noise-chasing; slide 5 demonstrates sensitivity through repeated samples. Flexibility is not inherently bad: its risk depends on sample size, noise, regularization, and the learning procedure.")
 
-    s = base(prs, 4, "The real test  /  unseen observations", "New data does not repeat the noise.",
-             "Keep both models frozen. Reveal fresh observations.")
+    s = base(prs, 4, "New data does not repeat the noise.")
     text(s, "A   /   Still misses the curve", 1.02, 2.99, 5.7, .3, 16)
     text(s, "B   /   The wiggles do not travel", 7.12, 2.99, 5.6, .3, 16)
     fresh_x = np.linspace(-.96, .96, 25)
@@ -221,8 +214,7 @@ def build():
     legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line")])
     note(s, "These are new observations from the SAME data-generating processes and the SAME x range. There is no distribution shift or extrapolation here. Neither model is refitted. A keeps making structured errors because its family is wrong for this pattern; B's learned wiggles fail to match the new noise. Real-world performance also faces distribution shift, but that separate issue is unnecessary to demonstrate generalization failure. Point out that training fit alone did not tell us which predictions would be reliable.")
 
-    s = base(prs, 5, "What variance actually means", "Change the sample. Fit again.",
-             "Eight fresh training samples per problem. Same model settings.")
+    s = base(prs, 5, "Change the sample. Fit again.")
     text(s, "A   /   Consistently wrong", 1.02, 2.99, 5, .3, 16)
     text(s, "B   /   Sensitive to the sample", 7.12, 2.99, 5.8, .3, 16)
     ensemble_a, ensemble_b = [], []
@@ -237,7 +229,7 @@ def build():
     legend(s, [("one fit per sample", PURPLE, "line"), ("true pattern", INK, "dash")])
     note(s, "Each pale curve is trained on a new set of noisy outputs at the same x positions. The straight fits cluster, but miss the curved truth: low variance does not imply accuracy. Flexible fits on the linear problem spread out, especially near the boundaries: the training sample changes the predictions substantially. Both panels share the same axis limits. Some degree-11 fits leave the visible vertical range; those portions are omitted rather than compressed. This is a repeated-sampling demonstration, not multiple models fitted to the same sample. Bias and variance are defined at an input x and can vary across the domain.")
 
-    s = base(prs, 6, "Choosing complexity", "A closer fit is not always a better model.")
+    s = base(prs, 6, "A closer fit is not always a better model.")
     c = np.linspace(0, 1, 220)
     train = .10 + .48*np.exp(-4*c)
     test = .28 + 1.65*(c-.48)**2
@@ -255,14 +247,13 @@ def build():
     text(s, "Schematic, not measured", 9.04, 6.44, 3.4, .3, 12, MUTED)
     note(s, "This is the classic schematic, not the measured curve from our examples and not a universal law. In nested least-squares model families training loss cannot increase as flexibility grows, while expected test loss may first improve and then worsen. Under squared error, expected prediction error at x decomposes into squared bias, variance, and irreducible noise, assuming a stable data-generating process and averaging over training samples and fresh output noise. There is no guarantee of a smooth U-shape in every regime. Choose hyperparameters using a validation split or cross-validation; reserve a final test set for an honest, one-time evaluation. Do not tune on test results.")
 
-    s = base(prs, 7, "Read the losses", "The smallest training loss can lose.",
-             "One curved dataset. Three models. Mean squared error ↓")
+    s = base(prs, 7, "The smallest training loss can lose.")
     # Native PowerPoint table: all labels and measured values can be edited.
     table = s.shapes.add_table(4, 4, Inches(.86), Inches(3.1), Inches(11.57), Inches(2.55)).table
     for col, width in zip(table.columns, [3.45, 2.72, 2.70, 2.70]):
         col.width = Inches(width)
     rows = [
-        ["Fit", "Model degree", "Training loss", "Testing loss"],
+        ["Fit", "Model degree", "Training MSE ↓", "Testing MSE ↓"],
         ["Underfitting", "1", f"{losses[0][0]:.3f}", f"{losses[0][1]:.3f}"],
         ["Good fit", "2", f"{losses[1][0]:.3f}", f"{losses[1][1]:.3f}"],
         ["Overfitting", "12", f"{losses[2][0]:.3f}", f"{losses[2][1]:.3f}"],
@@ -292,11 +283,9 @@ def build():
                     fill.append(color)
                 el.append(fill)
                 tc_pr.append(el)
-    text(s, "Better on training. Worse on testing.", .98, 6.05, 10.8, .45, 24, ORANGE)
-    text(s, "20 training points · 1,000 independent test points · identical split for all models", .98, 6.61, 11.5, .26, 12, MUTED)
     note(s, "All rows are actual computed results on example A's quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation 0.16. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. This table is not based on example B, whose degree-11 model was used to make the wiggles easy to see.")
 
-    s = base(prs, 8, "Take it with you", "Learn the pattern.\nNot the noise.", field=True)
+    s = base(prs, 8, "Learn the pattern.\nNot the noise.", field=True)
     # Give the two-line closing headline more room than the standard title.
     for shape in s.shapes:
         if shape.has_text_frame and shape.text == "Learn the pattern.\nNot the noise.":
@@ -330,7 +319,11 @@ def build():
     assert len(reopened.slides) == 8
     saved_table = next(shape.table for shape in reopened.slides[6].shapes if shape.has_table)
     assert saved_table.cell(2, 3).text == f"{losses[1][1]:.3f}"
-    for slide in reopened.slides:
+    for number, slide in enumerate(reopened.slides, start=1):
+        visible_text = [shape.text for shape in slide.shapes if shape.has_text_frame]
+        assert f"{number:02d}/08" in visible_text
+        assert not any("BIAS–VARIANCE" in value for value in visible_text)
+        assert not any("Two different datasets" in value for value in visible_text)
         for shape in slide.shapes:
             assert shape.left >= 0 and shape.top >= 0
             assert shape.left + shape.width <= prs.slide_width + Inches(.02)
