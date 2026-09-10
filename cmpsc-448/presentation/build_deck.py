@@ -189,7 +189,7 @@ def build():
     legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line")])
     note(s, "Keep the straight fit from slide 1 frozen. Reveal the first 25 observations from the independent 1,000-point test set; slide 3 will show exactly these same observations and axis limits. No model is refitted, and there is no distribution shift or extrapolation. The line still misses the curvature. Bias is the systematic difference between the average prediction over repeated training samples and the true regression function. Here the model family only permits straight lines, so even its average fit cannot capture curvature. The true curve is deliberately hidden here, as it would be in practice; only the frozen model and unseen observations are shown. Underfitting usually leaves substantial error even on training data. More samples alone will not make a straight model quadratic. Linear regression can also use polynomial features: it is the straight-line specification here that is restrictive.")
 
-    s = base(prs, 3, "Flexible enough to learn the noise.")
+    s = base(prs, 3, "Too complex to learn the pattern.")
     plot(s, (.98, 2.94, 7.12, 3.10),
          [(g, models[2](g), ORANGE, False, 3)],
          [(fresh_x, fresh_y, PURPLE, True)])
