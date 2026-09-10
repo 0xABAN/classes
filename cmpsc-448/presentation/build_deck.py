@@ -170,7 +170,7 @@ def build():
     g = np.linspace(-1, 1, 400)
     panels = [(left, 3.1, 3.35, 2.85) for left in (.98, 5.02, 9.06)]
     opening_panels = [(left, 3.1, 5.0, 2.85) for left in (.98, 7.12)]
-    # Both unseen-data slides show the same subset of the loss table's test set.
+    # All unseen-data graphs show the same subset of the loss table's test set.
     fresh_x, fresh_y = xt[:25], yt[:25]
 
     s = base(prs, 1, "Which model would you trust?")
@@ -211,23 +211,14 @@ def build():
     legend(s, [("one fit per sample", PURPLE, "line"), ("true pattern", INK, "dash")])
     note(s, "Generate eight fresh training samples at the original 20 x positions. For each sample, all three model degrees receive exactly the same noisy outputs. This is the first reveal of the degree-2 good-fit model family. Each pale curve is one refit; the original fits from slides 1–3 are not used here. Straight fits cluster but miss the quadratic truth. Degree-2 curves stay close to the truth. Degree-12 curves spread out, especially near the boundaries. All three panels share identical axes. Some degree-12 fits leave the visible vertical range; those portions are omitted rather than compressed. This controlled repeated-sampling comparison isolates sensitivity to the training sample. Bias and variance are defined at an input x and can vary across the domain.")
 
-    s = base(prs, 5, "A closer fit is not always a better model.")
-    c = np.linspace(0, 1, 220)
-    train = .10 + .48*np.exp(-4*c)
-    test = .28 + 1.65*(c-.48)**2
-    assert np.all(test > train)
-    plot(s, (1.02, 3.0, 7.2, 2.83),
-         [(c, train, MUTED, False, 2.5), (c, test, ORANGE, False, 3)],
-         ylim=(0, 1.08), xlim=(0, 1), axis_labels=("", "loss"))
-    text(s, "simpler", 1.02, 6.0, 2, .3, 14, MUTED)
-    text(s, "more flexible →", 6.52, 6.0, 2.4, .3, 14, MUTED)
-    text(s, "Underfit", 1.15, 2.6, 2, .35, 16, MUTED)
-    text(s, "Balance", 4.0, 2.6, 2, .35, 16, INK)
-    text(s, "Overfit", 6.74, 2.6, 2, .35, 16, MUTED)
-    text(s, "Choose using\nvalidation data.", 9.05, 3.72, 3.5, 1.4, 28)
-    legend(s, [("training loss", MUTED, "line"), ("expected test loss", ORANGE, "line")])
-    text(s, "Schematic, not measured", 9.04, 6.44, 3.4, .3, 12, MUTED)
-    note(s, "This is the classic schematic, not the measured curve from our examples and not a universal law. In nested least-squares model families training loss cannot increase as flexibility grows, while expected test loss may first improve and then worsen. Under squared error, expected prediction error at x decomposes into squared bias, variance, and irreducible noise, assuming a stable data-generating process and averaging over training samples and fresh output noise. There is no guarantee of a smooth U-shape in every regime. Choose hyperparameters using a validation split or cross-validation; reserve a final test set for an honest, one-time evaluation. Do not tune on test results.")
+    s = base(prs, 5, "A balanced fit learns the pattern.")
+    text(s, "Training set", opening_panels[0][0], 2.65, 3.4, .3, 16)
+    text(s, "Test set", opening_panels[1][0], 2.65, 3.4, .3, 16)
+    balanced_curve = [(g, models[1](g), ORANGE, False, 3)]
+    plot(s, opening_panels[0], balanced_curve, [(x, y, INK, False)])
+    plot(s, opening_panels[1], balanced_curve, [(fresh_x, fresh_y, PURPLE, True)])
+    legend(s, [("training observations", INK, "dot"), ("unseen observations", PURPLE, "hollow"), ("same model", ORANGE, "line")])
+    note(s, "The left graph fits a degree-2 polynomial to the exact same 20 training observations used by the straight and wiggly models on slide 1. It follows the broad curvature without trying to hit every noisy point. The right graph keeps that model frozen and reveals the exact same 25 unseen observations shown on slides 2 and 3. Both graphs use identical axes. The model was not refitted on the test set. Unlike the overly rigid line, it captures the curved relationship; unlike the degree-12 fit, it avoids chasing individual noise fluctuations. Its predictions will still miss some points because the observations contain irreducible noise. Slide 6 reports its measured losses over all training points and all 1,000 test points. This degree was fixed for the demonstration; in practice choose complexity using validation data or cross-validation, then evaluate once on an untouched test set.")
 
     s = base(prs, 6, "The smallest training loss can lose.")
     # Native PowerPoint table: all labels and measured values can be edited.
@@ -265,7 +256,7 @@ def build():
                     fill.append(color)
                 el.append(fill)
                 tc_pr.append(el)
-    note(s, f"All rows are actual computed results on the shared quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation {NOISE_STD}. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. The degree-1 and degree-12 rows are the frozen models shown on slides 1–3. The degree-2 row is fitted to the same original training set; slide 4 introduced this model family through fresh refits. All rows use identical training and test data. Slides 2 and 3 display only the first 25 test points for readability, while the table evaluates all 1,000.")
+    note(s, f"All rows are actual computed results on the shared quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation {NOISE_STD}. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. The degree-1 and degree-12 rows are the frozen models shown on slides 1–3. The degree-2 row is the exact model shown on slide 5, fitted to the same original training set; slide 4 introduced this model family through fresh refits. All rows use identical training and test data. Slides 2, 3, and 5 display only the first 25 test points for readability, while the table evaluates all 1,000.")
 
     s = base(prs, 7, "Learn the pattern.\nNot the noise.")
     # Give the two-line closing headline more room than the standard title.
@@ -317,6 +308,9 @@ def build():
         assert len(dots) == len(fresh_x)
         unseen_positions.append([(shape.left, shape.top) for shape in dots])
     assert unseen_positions[0] == unseen_positions[1]
+    balanced_paths = reopened.slides[4]._element.xpath(".//a:custGeom/a:pathLst")
+    assert len(balanced_paths) == 2
+    assert balanced_paths[0].xml == balanced_paths[1].xml
     assert all("Simple curve" not in shape.text for shape in reopened.slides[0].shapes
                if shape.has_text_frame)
     for number, slide in enumerate(reopened.slides, start=1):
