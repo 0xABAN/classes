@@ -198,7 +198,6 @@ def build():
     note(s, "Begin with no assumed machine-learning background. A model is a rule learned from examples so that we can predict an output for a new input. On these graphs, x is the input and y is the output; black dots are observed examples, and the orange line is the model's prediction. Training means choosing the model's parameters using those examples. Both panels use the exact same 20 noisy observations and identical axes. Underfitting means the model is too simple to capture the relationship: this straight line misses the broad curve. Overfitting means treating random fluctuations in the training examples as a pattern that will repeat: the flexible curve chases the noise. Noise means unpredictable variation in observations, not necessarily a mistake in the data. These pictures illustrate the concepts; how well a model predicts genuinely new observations is what ultimately matters. High bias and high variance describe the typical failure modes illustrated here, not definitions of underfitting and overfitting. First compare performance on training examples and new examples. Then ask what happens when we train on different examples.")
 
     s = base(prs, 2, "The lowest training loss can mislead")
-    text(s, "Illustrative losses (%) · not measured from these graphs", .98, 2.25, 11.4, .4, 17, MUTED)
     loss_rows = [
         ("Model", "Training loss", "Test loss"),
         ("High bias", "30%", "32%"),
@@ -317,7 +316,8 @@ def build():
     tables = [shape.table for slide in saved.slides for shape in slide.shapes if shape.has_table]
     assert len(tables) == 1
     assert [tuple(cell.text for cell in row.cells) for row in tables[0].rows] == loss_rows
-    assert any("Illustrative losses" in shape.text for shape in saved.slides[1].shapes if shape.has_text_frame)
+    assert "invented teaching values" in saved.slides[1].notes_slide.notes_text_frame.text
+    assert not any("Illustrative losses" in shape.text for shape in saved.slides[1].shapes if shape.has_text_frame)
     primer_text = [shape.text for shape in saved.slides[0].shapes if shape.has_text_frame]
     assert "Underfitting (High Bias)" in primer_text
     assert "Overfitting (High Variance)" in primer_text
