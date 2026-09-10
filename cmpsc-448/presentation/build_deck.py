@@ -198,7 +198,7 @@ def build():
     legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line")])
     note(s, "Keep the degree-12 fit from slide 1 frozen and reveal the exact same 25 unseen observations as slide 2. The model was trained on the original 20 points, not these new points. Its wiggles follow noise from training that is not repeated in the test sample. There is no distribution shift or extrapolation. After revealing the good-fit alternative on slide 4, use slide 6 to quantify why the lowest training loss does not guarantee the lowest test loss. Variance means variability of model predictions across possible training datasets, not variability of the input data and not simply a curve looking wiggly. One fit suggests noise-chasing; slide 4 demonstrates sensitivity through repeated samples. Flexibility is not inherently bad: its risk depends on sample size, noise, regularization, and the learning procedure.")
 
-    s = base(prs, 4, "Change the sample. Fit again.")
+    s = base(prs, 4, "A closer look at variance")
     ensembles = [[], [], []]
     for seed in range(20, 28):
         sample_y = truth(x) + np.random.default_rng(seed).normal(0, NOISE_STD, len(x))
