@@ -105,7 +105,7 @@ def base(prs, n, title):
     slide.background.fill.fore_color.rgb = RGBColor.from_string(PAPER)
     slide.shapes.add_picture(gradient(), Inches(12.87), Inches(.22), Inches(.24), Inches(7.06))
     text(slide, title, .62, 1.05, 12, .8, 38)
-    text(slide, f"{n:02d}/09", 11.94, 7.12, .75, .22, 11, MUTED)
+    text(slide, f"{n:02d}/10", 11.94, 7.12, .75, .22, 11, MUTED)
     return slide
 
 
@@ -176,7 +176,7 @@ def build():
     prs.slide_width, prs.slide_height = Inches(13.333333), Inches(7.5)
     prs.core_properties.title = "The bias–variance tradeoff"
     prs.core_properties.subject = "CMPSC 448 — bias and variance through repeated training"
-    prs.core_properties.author = "CMPSC 448"
+    prs.core_properties.author = "Adam Torres Encarnacion"
     x, samples, models = data()
     g = np.linspace(-1, 1, 400)
     predictions = {degree: np.array([model(g) for model in fits]) for degree, fits in models.items()}
@@ -184,7 +184,12 @@ def build():
     two = [(left, 3.1, 5.0, 2.85) for left in (.98, 7.12)]
     large = (.98, 2.94, 7.12, 3.10)
 
-    s = base(prs, 1, "A model learns a pattern from examples")
+    s = base(prs, 1, "")
+    text(s, "The Bias–Variance\nTradeoff", .95, 2.4, 11.4, 1.8, 48)
+    text(s, "Adam Torres Encarnacion", .98, 4.65, 10.5, .5, 23, MUTED)
+    note(s, "Introduce yourself and the topic: how a model can miss the pattern or become too sensitive to its training data, and how both contribute to prediction error.")
+
+    s = base(prs, 2, "A model learns a pattern from examples")
     primer_panels = [(left, 2.85, 5.0, 2.45) for left in (.98, 7.12)]
     for rect, degree, label, explanation in zip(
         primer_panels, (1, 12), ("Underfitting (High Bias)", "Overfitting (High Variance)"),
@@ -197,7 +202,7 @@ def build():
     legend(s, [("examples (data)", INK, "dot"), ("learned model", ORANGE, "line")], y=6.62)
     note(s, "Begin with no assumed machine-learning background. A model is a rule learned from examples so that we can predict an output for a new input. On these graphs, x is the input and y is the output; black dots are observed examples, and the orange line is the model's prediction. Training means choosing the model's parameters using those examples. Both panels use the exact same 20 noisy observations and identical axes. Underfitting means the model is too simple to capture the relationship: this straight line misses the broad curve. Overfitting means treating random fluctuations in the training examples as a pattern that will repeat: the flexible curve chases the noise. Noise means unpredictable variation in observations, not necessarily a mistake in the data. These pictures illustrate the concepts; how well a model predicts genuinely new observations is what ultimately matters. High bias and high variance describe the typical failure modes illustrated here, not definitions of underfitting and overfitting. First compare performance on training examples and new examples. Then ask what happens when we train on different examples.")
 
-    s = base(prs, 2, "The lowest training loss can mislead")
+    s = base(prs, 3, "The lowest training loss can mislead")
     loss_rows = [
         ("Model", "Training loss", "Test loss"),
         ("High bias", "30%", "32%"),
@@ -228,7 +233,7 @@ def build():
     fixed_x = .5
     four = [(left, 3.1, 2.3, 2.85) for left in (.98, 4.0, 7.02, 10.04)]
 
-    s = base(prs, 3, "High variance, low bias")
+    s = base(prs, 4, "High variance, low bias")
     text(s, "Different training data changes the model", .65, 1.9, 11.5, .35, 18, MUTED)
     polynomial_predictions = [float(model(fixed_x)) for model in models[12][:4]]
     for rect, sample, model, label, prediction in zip(
@@ -243,7 +248,7 @@ def build():
     legend(s, [("training observations", INK, "dot"), ("degree-12 polynomial", ORANGE, "line")], y=6.62)
     note(s, f"Samples A through D come from the same quadratic relationship at the same 20 input positions, with independent output noise. Fit each sample separately: a degree-12 polynomial can bend much more than a straight line. At x = {fixed_x}, its predictions are {', '.join(f'{value:.2f}' for value in polynomial_predictions)} for A through D. Next we will compare these predictions with straight-line fits on the exact same samples and axes. This illustrates sensitivity to training data, not just wiggliness. Low bias refers to the average over repeated training samples, not every individual curve: this polynomial family contains the true quadratic and is unbiased in expectation under our zero-mean noise and fixed-design least-squares assumptions. It does not mean all polynomial models have high variance: the quadratic model we show later is more stable here. Four fits are an illustration, not a precise population estimate. Next keep the data fixed and switch to linear regression.")
 
-    s = base(prs, 4, "High bias, low variance")
+    s = base(prs, 5, "High bias, low variance")
     text(s, "Different training data changes the model", .65, 1.9, 11.5, .35, 18, MUTED)
     fixed_predictions = [float(model(fixed_x)) for model in models[1][:4]]
     for rect, sample, model, label, prediction in zip(
@@ -258,7 +263,7 @@ def build():
     legend(s, [("training observations", INK, "dot"), ("linear regression", ORANGE, "line")], y=6.62)
     note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit ordinary least-squares linear regression, with an intercept and one slope, separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changes the predictions slightly even though the underlying problem does not change. These straight-line fits are relatively stable, illustrating low variance, but they miss the curved relationship: stability alone does not guarantee accuracy. Four samples illustrate the idea; they do not estimate population variance reliably. Next compare degree-2 and degree-12 models on eight samples.")
 
-    s = base(prs, 5, "High variance: predictions change a lot")
+    s = base(prs, 6, "High variance: predictions change a lot")
     variance_panels = [(left, 3.1, 3.1, 2.85) for left in (.98, 5.0)]
     variance_at_x = np.var([model(fixed_x) for model in models[12]])
     for rect, degree, label in zip(variance_panels, (2, 12), ("Degree 2 / less variation", "Degree 12 / more variation")):
@@ -271,7 +276,7 @@ def build():
     legend(s, [("one fit per sample", PURPLE, "line"), ("average of 8 fits", ORANGE, "line")])
     note(s, f"At x = {fixed_x}, compute the mean of the eight degree-12 predictions, subtract it from each prediction, square each difference, and average those eight squares. The displayed empirical variance is {variance_at_x:.6f}, using division by eight to describe this finite ensemble, not the unbiased sample-variance estimator with division by seven. Each pale curve is a model fitted to one of eight training samples, including A through D. Every degree sees exactly the same eight samples. The orange curve is the pointwise arithmetic average of those eight predictions, not a ninth fit and not the true relationship. At any fixed input, variance describes the spread of predictions around their average across training samples. The degree-12 procedure is more sensitive here; the degree-2 procedure is more stable. Wiggliness by itself is not the definition of variance, and variance is not the scatter of the raw data. Eight curves are a teaching illustration, not a precise population estimate. Axis limits are identical; curve portions outside the visible range are omitted. Flexibility need not produce high variance in every setting; sample size and regularization also matter.")
 
-    s = base(prs, 6, "High bias: predictions are consistently off")
+    s = base(prs, 7, "High bias: predictions are consistently off")
     curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[1]]
     plot(s, large, curves + [
         (g, truth(g), INK, True, 2),
@@ -289,7 +294,7 @@ def build():
     legend(s, [("one straight fit", PURPLE, "line"), ("average of 8 fits", ORANGE, "line"), ("true pattern", INK, "dash")])
     note(s, f"Now reveal the true regression function, shown as the dashed curve. We know it because this is synthetic data; it is usually unknown in practice. These are degree-1 fits to the same eight samples. They cluster, yet their average misses the curved relationship. At x = 0 the average shown predicts {mean_at_zero:.2f}, while the true mean output is {truth(0):.2f}; the vertical segment marks that gap. Bias at a fixed input is the expected model prediction over training samples minus the true regression function at that input. The displayed eight-fit average is only a finite-sample approximation to that expectation. Bias is not a single model's residual against one noisy observation. Low variance does not guarantee low bias. A straight-line family is too restrictive for this quadratic relationship, connecting briefly to the other student's underfitting example.")
 
-    s = base(prs, 7, "A good model stays close to the truth")
+    s = base(prs, 8, "A good model stays close to the truth")
     curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[2]]
     plot(s, large, curves + [
         (g, truth(g), INK, True, 2),
@@ -297,9 +302,9 @@ def build():
     ])
     text(s, "Low bias.\nLow variance.", 8.75, 3.57, 3.8, 1.4, 28, ORANGE)
     legend(s, [("one degree-2 fit", PURPLE, "line"), ("average of 8 fits", ORANGE, "line"), ("true pattern", INK, "dash")])
-    note(s, "Return to the degree-2 fits from slide 5, now with the true pattern revealed. All data, noise levels, and axes remain unchanged. Their average is close to the true relationship, unlike the degree-1 average; their spread is smaller than the degree-12 spread. Low bias and low variance are relative descriptions for this controlled example, not claims of zero prediction error. Because the quadratic family contains the true function and noise has mean zero, fixed-design least squares is unbiased here in expectation. The eight-fit average need not equal truth exactly. Increasing flexibility from a line to a quadratic reduces systematic error; increasing it further can add sensitivity without useful signal. That is the tradeoff, not a universal requirement that bias and variance must always move in opposite directions.")
+    note(s, "Return to the degree-2 fits from slide 6, now with the true pattern revealed. All data, noise levels, and axes remain unchanged. Their average is close to the true relationship, unlike the degree-1 average; their spread is smaller than the degree-12 spread. Low bias and low variance are relative descriptions for this controlled example, not claims of zero prediction error. Because the quadratic family contains the true function and noise has mean zero, fixed-design least squares is unbiased here in expectation. The eight-fit average need not equal truth exactly. Increasing flexibility from a line to a quadratic reduces systematic error; increasing it further can add sensitivity without useful signal. That is the tradeoff, not a universal requirement that bias and variance must always move in opposite directions.")
 
-    s = base(prs, 8, "Even good models make errors")
+    s = base(prs, 9, "Even good models make errors")
     text(s, "MSE", 1.7, 2.8, 1.5, .8, 31)
     text(s, "=", 3.5, 2.8, .65, .8, 31, MUTED)
     text(s, "bias²", 4.25, 2.8, 1.25, .8, 31, ORANGE)
@@ -317,7 +322,7 @@ def build():
     text(s, "Even the true pattern cannot predict every noisy observation.", .98, 6.18, 11.6, .55, 22, MUTED)
     note(s, f"MSE stands for mean squared error. Here it means expected prediction MSE over retraining and independent new observations, not one measured training or test loss. This equality is the squared-error decomposition at a fixed input x: E[(f_hat_D(x) - Y_new)²] = (E_D[f_hat_D(x)] - f(x))² + Var_D[f_hat_D(x)] + Var(Y_new | x). Average over random training datasets D and independent fresh output noise, with Y_new = f(x) + epsilon and E[epsilon | x] = 0. The noise term is conditional variance, not standard deviation; here it is {NOISE_STD}² = {NOISE_STD**2:.2f}. Even a predictor equal to the true mean function cannot predict the random noise in a fresh observation. The decomposition is not a formula for one observed residual or one training loss, and is not generally valid in this form for classification error or every loss function. Noise is irreducible relative to the information available to the model; better measurements or extra informative features can change that information. The build checks the finite-ensemble squared-error identity numerically. Do not imply the displayed eight curves are the full population expectation.")
 
-    s = base(prs, 9, "We want accurate, stable predictions")
+    s = base(prs, 10, "We want accurate, stable predictions")
     text(s, "BIAS", 1.0, 3.2, 4.8, .35, 14, ORANGE)
     text(s, "Is the average\nprediction off?", 1.0, 3.9, 5.0, 1.6, 32)
     text(s, "VARIANCE", 7.12, 3.2, 4.8, .35, 14, PURPLE)
@@ -333,19 +338,22 @@ def build():
     output = ROOT / "bias-variance-tradeoff.pptx"
     prs.save(output)
     saved = Presentation(output)
-    assert len(saved.slides) == 9
+    assert len(saved.slides) == 10
+    cover_text = [shape.text for shape in saved.slides[0].shapes if shape.has_text_frame]
+    assert "The Bias–Variance\nTradeoff" in cover_text
+    assert "Adam Torres Encarnacion" in cover_text
     assert all(slide.has_notes_slide and slide.notes_slide.notes_text_frame.text for slide in saved.slides)
     tables = [shape.table for slide in saved.slides for shape in slide.shapes if shape.has_table]
     assert len(tables) == 1
     assert [tuple(cell.text for cell in row.cells) for row in tables[0].rows] == loss_rows
-    assert "invented teaching values" in saved.slides[1].notes_slide.notes_text_frame.text
-    assert not any("Illustrative losses" in shape.text for shape in saved.slides[1].shapes if shape.has_text_frame)
-    primer_text = [shape.text for shape in saved.slides[0].shapes if shape.has_text_frame]
+    assert "invented teaching values" in saved.slides[2].notes_slide.notes_text_frame.text
+    assert not any("Illustrative losses" in shape.text for shape in saved.slides[2].shapes if shape.has_text_frame)
+    primer_text = [shape.text for shape in saved.slides[1].shapes if shape.has_text_frame]
     assert "Underfitting (High Bias)" in primer_text
     assert "Overfitting (High Variance)" in primer_text
     # Compare saved dots with the exact samples used to fit the opening models.
     assert np.all((samples[:4] >= Y_LIMITS[0]) & (samples[:4] <= Y_LIMITS[1]))
-    dots = [shape for shape in saved.slides[3].shapes if shape.name.startswith("Oval")
+    dots = [shape for shape in saved.slides[4].shapes if shape.name.startswith("Oval")
             and shape.fill.fore_color.rgb == RGBColor.from_string(INK)][:80]
     assert len(dots) == 80
     expected = [project(rect, a, b) for rect, sample in zip(four, samples[:4])
@@ -353,15 +361,15 @@ def build():
     centers = [((shape.left+shape.width/2)/Inches(1),
                 (shape.top+shape.height/2)/Inches(1)) for shape in dots]
     np.testing.assert_allclose(centers, expected, atol=2e-6)
-    polynomial_dots = [shape for shape in saved.slides[2].shapes if shape.name.startswith("Oval")
+    polynomial_dots = [shape for shape in saved.slides[3].shapes if shape.name.startswith("Oval")
                        and shape.fill.fore_color.rgb == RGBColor.from_string(INK)][:80]
     assert [(shape.left, shape.top) for shape in polynomial_dots] == [(shape.left, shape.top) for shape in dots]
     np.testing.assert_allclose(polynomial_predictions, [model(fixed_x) for model in models[12][:4]])
     assert np.var(polynomial_predictions) > np.var(fixed_predictions)
     all_predictions_at_x = np.array([model(fixed_x) for model in models[12]])
     np.testing.assert_allclose(variance_at_x, np.mean((all_predictions_at_x - all_predictions_at_x.mean())**2))
-    assert "MSE" in [shape.text for shape in saved.slides[7].shapes if shape.has_text_frame]
-    primer_dots = [shape for shape in saved.slides[0].shapes
+    assert "MSE" in [shape.text for shape in saved.slides[8].shapes if shape.has_text_frame]
+    primer_dots = [shape for shape in saved.slides[1].shapes
                    if shape.name.startswith("Oval")][:40]
     assert len(primer_dots) == 40
     for index, shape in enumerate(primer_dots):
@@ -376,7 +384,7 @@ def build():
     assert 0 < np.ptp(fixed_predictions) < .4
     for number, slide in enumerate(saved.slides, 1):
         visible = [shape.text for shape in slide.shapes if shape.has_text_frame]
-        assert f"{number:02d}/09" in visible
+        assert f"{number:02d}/10" in visible
         assert any(shape.left == Inches(12.87) and shape.width == Inches(.24) for shape in slide.shapes)
         assert not any(shape.top == Inches(7.02) for shape in slide.shapes)
         for shape in slide.shapes:
@@ -389,7 +397,7 @@ def build():
 
 def verify(prs, x, samples, models, g, predictions, means):
     """Check the actual repeated-sampling claims and the squared-error identity."""
-    assert len(prs.slides) == 9
+    assert len(prs.slides) == 10
     assert samples.shape == (8, 20)
     assert not np.array_equal(samples[0], samples[1])
     for degree, fits in models.items():

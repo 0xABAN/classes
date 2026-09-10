@@ -1,6 +1,7 @@
 # The bias–variance tradeoff
 
-Nine minimal slides for CMPSC 448: a beginner-friendly fitting primer,
+Ten minimal slides for CMPSC 448, presented by Adam Torres Encarnacion:
+a title slide and beginner-friendly fitting primer,
 followed by a focus on bias and variance through repeated training.
 
 - **Present:** `bias-variance-tradeoff.pptx` (16:9; editable text, points, and curves).
@@ -11,15 +12,16 @@ followed by a focus on bias and variance through repeated training.
 
 ## Story
 
-1. Define a model, underfitting, and overfitting using identical data.
-2. Illustrative training/test loss percentages compare high bias, good fit, and high variance.
-3. Degree-12 polynomial fits vary across four training samples.
-4. Linear regression gives more stable predictions on those same four samples.
-5. Eight refits show variance, with its definition and a computed fixed-input example.
-6. Stable straight fits still miss the true relationship: bias.
-7. Quadratic fits are closer to truth and more stable than the flexible fits.
-8. MSE = bias² + variance + noise (expected prediction MSE, as explained in notes).
-9. Two questions: is the average prediction off, and how much does retraining change it?
+1. The Bias–Variance Tradeoff — Adam Torres Encarnacion.
+2. Define a model, underfitting, and overfitting using identical data.
+3. Illustrative training/test loss percentages compare high bias, good fit, and high variance.
+4. Degree-12 polynomial fits vary across four training samples.
+5. Linear regression gives more stable predictions on those same four samples.
+6. Eight refits show variance, with its definition and a computed fixed-input example.
+7. Stable straight fits still miss the true relationship: bias.
+8. Quadratic fits are closer to truth and more stable than the flexible fits.
+9. MSE = bias² + variance + noise (expected prediction MSE, as explained in notes).
+10. Two questions: is the average prediction off, and how much does retraining change it?
 
 ## Data and interpretation
 
@@ -36,7 +38,7 @@ empirical illustrations from population definitions and explain the independent
 fresh-noise assumption. The noise term in the equation is variance (0.16), not
 standard deviation (0.4).
 
-Slide 2's training/test percentages (30/32, 8/10, 1/25) are explicitly
+Slide 3's training/test percentages (30/32, 8/10, 1/25) are explicitly
 illustrative, not measured from the graphs. They represent a hypothetical loss
 normalized to a shared fixed reference, not accuracy or ordinary MSE percentages.
 The native editable table illustrates why training loss alone can mislead.
