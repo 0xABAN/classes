@@ -259,12 +259,17 @@ def build():
     note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit ordinary least-squares linear regression, with an intercept and one slope, separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changes the predictions slightly even though the underlying problem does not change. These straight-line fits are relatively stable, illustrating low variance, but they miss the curved relationship: stability alone does not guarantee accuracy. Four samples illustrate the idea; they do not estimate population variance reliably. Next compare degree-2 and degree-12 models on eight samples.")
 
     s = base(prs, 5, "High variance: predictions change a lot")
-    for rect, degree, label in zip(two, (2, 12), ("Degree 2  /  less variation", "Degree 12  /  more variation")):
-        text(s, label, rect[0], 2.65, 5, .3, 16)
+    variance_panels = [(left, 3.1, 3.1, 2.85) for left in (.98, 5.0)]
+    variance_at_x = np.var([model(fixed_x) for model in models[12]])
+    for rect, degree, label in zip(variance_panels, (2, 12), ("Degree 2 / less variation", "Degree 12 / more variation")):
+        text(s, label, rect[0], 2.65, 3.4, .3, 15)
         curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[degree]]
         plot(s, rect, curves + [(g, means[degree], ORANGE, False, 2.8)])
+    text(s, "Variance", 8.75, 3.35, 3.6, .6, 30, PURPLE)
+    text(s, "Average squared distance\nfrom the mean prediction.", 8.75, 4.12, 3.8, 1.15, 22)
+    text(s, f"Degree 12 at x = {fixed_x}\nVariance ≈ {variance_at_x:.3f}", 8.75, 5.45, 3.8, .75, 18, MUTED)
     legend(s, [("one fit per sample", PURPLE, "line"), ("average of 8 fits", ORANGE, "line")])
-    note(s, "Each pale curve is a model fitted to one of eight training samples, including A through D. Every degree sees exactly the same eight samples. The orange curve is the pointwise arithmetic average of those eight predictions, not a ninth fit and not the true relationship. At any fixed input, variance describes the spread of predictions around their average across training samples. The degree-12 procedure is more sensitive here; the degree-2 procedure is more stable. Wiggliness by itself is not the definition of variance, and variance is not the scatter of the raw data. Eight curves are a teaching illustration, not a precise population estimate. Axis limits are identical; curve portions outside the visible range are omitted. Flexibility need not produce high variance in every setting; sample size and regularization also matter.")
+    note(s, f"At x = {fixed_x}, compute the mean of the eight degree-12 predictions, subtract it from each prediction, square each difference, and average those eight squares. The displayed empirical variance is {variance_at_x:.6f}, using division by eight to describe this finite ensemble, not the unbiased sample-variance estimator with division by seven. Each pale curve is a model fitted to one of eight training samples, including A through D. Every degree sees exactly the same eight samples. The orange curve is the pointwise arithmetic average of those eight predictions, not a ninth fit and not the true relationship. At any fixed input, variance describes the spread of predictions around their average across training samples. The degree-12 procedure is more sensitive here; the degree-2 procedure is more stable. Wiggliness by itself is not the definition of variance, and variance is not the scatter of the raw data. Eight curves are a teaching illustration, not a precise population estimate. Axis limits are identical; curve portions outside the visible range are omitted. Flexibility need not produce high variance in every setting; sample size and regularization also matter.")
 
     s = base(prs, 6, "High bias: predictions are consistently off")
     curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[1]]
@@ -295,13 +300,13 @@ def build():
     note(s, "Return to the degree-2 fits from slide 5, now with the true pattern revealed. All data, noise levels, and axes remain unchanged. Their average is close to the true relationship, unlike the degree-1 average; their spread is smaller than the degree-12 spread. Low bias and low variance are relative descriptions for this controlled example, not claims of zero prediction error. Because the quadratic family contains the true function and noise has mean zero, fixed-design least squares is unbiased here in expectation. The eight-fit average need not equal truth exactly. Increasing flexibility from a line to a quadratic reduces systematic error; increasing it further can add sensitivity without useful signal. That is the tradeoff, not a universal requirement that bias and variance must always move in opposite directions.")
 
     s = base(prs, 8, "Even good models make errors")
-    text(s, "Expected squared error", .95, 2.8, 5.55, .8, 31)
-    text(s, "=", 6.25, 2.8, .65, .8, 31, MUTED)
-    text(s, "bias²", 7.0, 2.8, 1.25, .8, 31, ORANGE)
-    text(s, "+", 8.25, 2.8, .5, .8, 31, MUTED)
-    text(s, "variance", 8.8, 2.8, 2.0, .8, 31, PURPLE)
-    text(s, "+", 10.8, 2.8, .5, .8, 31, MUTED)
-    text(s, "noise", 11.3, 2.8, 1.25, .8, 31)
+    text(s, "MSE", 1.7, 2.8, 1.5, .8, 31)
+    text(s, "=", 3.5, 2.8, .65, .8, 31, MUTED)
+    text(s, "bias²", 4.25, 2.8, 1.25, .8, 31, ORANGE)
+    text(s, "+", 5.7, 2.8, .5, .8, 31, MUTED)
+    text(s, "variance", 6.3, 2.8, 2.0, .8, 31, PURPLE)
+    text(s, "+", 8.5, 2.8, .5, .8, 31, MUTED)
+    text(s, "noise", 9.15, 2.8, 1.25, .8, 31)
     for label, description, left, color in [
         ("BIAS²", "Systematic error.", .98, ORANGE),
         ("VARIANCE", "Sensitivity to the sample.", 5.02, PURPLE),
@@ -310,7 +315,7 @@ def build():
         text(s, label, left, 4.38, 3.5, .3, 13, color)
         text(s, description, left, 4.9, 3.5, 1.0, 23)
     text(s, "Even the true pattern cannot predict every noisy observation.", .98, 6.18, 11.6, .55, 22, MUTED)
-    note(s, f"This equality is the squared-error decomposition at a fixed input x: E[(f_hat_D(x) - Y_new)²] = (E_D[f_hat_D(x)] - f(x))² + Var_D[f_hat_D(x)] + Var(Y_new | x). Average over random training datasets D and independent fresh output noise, with Y_new = f(x) + epsilon and E[epsilon | x] = 0. The noise term is conditional variance, not standard deviation; here it is {NOISE_STD}² = {NOISE_STD**2:.2f}. Even a predictor equal to the true mean function cannot predict the random noise in a fresh observation. The decomposition is not a formula for one observed residual or one training loss, and is not generally valid in this form for classification error or every loss function. Noise is irreducible relative to the information available to the model; better measurements or extra informative features can change that information. The build checks the finite-ensemble squared-error identity numerically. Do not imply the displayed eight curves are the full population expectation.")
+    note(s, f"MSE stands for mean squared error. Here it means expected prediction MSE over retraining and independent new observations, not one measured training or test loss. This equality is the squared-error decomposition at a fixed input x: E[(f_hat_D(x) - Y_new)²] = (E_D[f_hat_D(x)] - f(x))² + Var_D[f_hat_D(x)] + Var(Y_new | x). Average over random training datasets D and independent fresh output noise, with Y_new = f(x) + epsilon and E[epsilon | x] = 0. The noise term is conditional variance, not standard deviation; here it is {NOISE_STD}² = {NOISE_STD**2:.2f}. Even a predictor equal to the true mean function cannot predict the random noise in a fresh observation. The decomposition is not a formula for one observed residual or one training loss, and is not generally valid in this form for classification error or every loss function. Noise is irreducible relative to the information available to the model; better measurements or extra informative features can change that information. The build checks the finite-ensemble squared-error identity numerically. Do not imply the displayed eight curves are the full population expectation.")
 
     s = base(prs, 9, "We want accurate, stable predictions")
     text(s, "BIAS", 1.0, 3.2, 4.8, .35, 14, ORANGE)
@@ -353,6 +358,9 @@ def build():
     assert [(shape.left, shape.top) for shape in polynomial_dots] == [(shape.left, shape.top) for shape in dots]
     np.testing.assert_allclose(polynomial_predictions, [model(fixed_x) for model in models[12][:4]])
     assert np.var(polynomial_predictions) > np.var(fixed_predictions)
+    all_predictions_at_x = np.array([model(fixed_x) for model in models[12]])
+    np.testing.assert_allclose(variance_at_x, np.mean((all_predictions_at_x - all_predictions_at_x.mean())**2))
+    assert "MSE" in [shape.text for shape in saved.slides[7].shapes if shape.has_text_frame]
     primer_dots = [shape for shape in saved.slides[0].shapes
                    if shape.name.startswith("Oval")][:40]
     assert len(primer_dots) == 40

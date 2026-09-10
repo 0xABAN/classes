@@ -15,10 +15,10 @@ followed by a focus on bias and variance through repeated training.
 2. Illustrative training/test loss percentages compare high bias, good fit, and high variance.
 3. Degree-12 polynomial fits vary across four training samples.
 4. Linear regression gives more stable predictions on those same four samples.
-5. Eight refits show prediction spread: variance.
+5. Eight refits show variance, with its definition and a computed fixed-input example.
 6. Stable straight fits still miss the true relationship: bias.
 7. Quadratic fits are closer to truth and more stable than the flexible fits.
-8. Expected squared prediction error = bias² + variance + noise.
+8. MSE = bias² + variance + noise (expected prediction MSE, as explained in notes).
 9. Two questions: is the average prediction off, and how much does retraining change it?
 
 ## Data and interpretation
