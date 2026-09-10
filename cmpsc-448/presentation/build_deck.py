@@ -228,9 +228,9 @@ def build():
     s = base(prs, 3, "Different training data changes the model")
     fixed_x = .5
     four = [(left, 3.1, 2.3, 2.85) for left in (.98, 4.0, 7.02, 10.04)]
-    fixed_predictions = [float(model(fixed_x)) for model in models[12][:4]]
+    fixed_predictions = [float(model(fixed_x)) for model in models[1][:4]]
     for rect, sample, model, label, prediction in zip(
-        four, samples[:4], models[12][:4], ("Sample A", "Sample B", "Sample C", "Sample D"), fixed_predictions
+        four, samples[:4], models[1][:4], ("Sample A", "Sample B", "Sample C", "Sample D"), fixed_predictions
     ):
         text(s, f"{label}\nprediction {prediction:.2f}", rect[0], 2.35, 2.5, .65, 16)
         plot(s, rect, [(g, model(g), ORANGE, False, 3)], [(x, sample, INK, False)])
@@ -238,8 +238,8 @@ def build():
         line(s, marker_x, rect[1], marker_x, rect[1]+rect[3], PURPLE, 1, True)
         dot(s, marker_x, marker_y, ORANGE, False, .075)
         text(s, "x = 0.5", marker_x-.38, 6.05, 1, .3, 14, PURPLE)
-    legend(s, [("training observations", INK, "dot"), ("degree-12 fit", ORANGE, "line")], y=6.62)
-    note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit the same degree-12 polynomial procedure separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changed the prediction even though the underlying problem did not change. Four samples illustrate the idea; they do not estimate population variance reliably. We now repeat the experiment eight times.")
+    legend(s, [("training observations", INK, "dot"), ("linear regression", ORANGE, "line")], y=6.62)
+    note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit ordinary least-squares linear regression, with an intercept and one slope, separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changes the predictions slightly even though the underlying problem does not change. These straight-line fits are relatively stable, illustrating low variance, but they miss the curved relationship: stability alone does not guarantee accuracy. Four samples illustrate the idea; they do not estimate population variance reliably. Next compare two more flexible model families on eight training samples.")
 
     s = base(prs, 4, "High variance: predictions change a lot")
     for rect, degree, label in zip(two, (2, 12), ("Degree 2  /  less variation", "Degree 12  /  more variation")):
@@ -340,7 +340,10 @@ def build():
         center = ((shape.left+shape.width/2)/Inches(1),
                   (shape.top+shape.height/2)/Inches(1))
         np.testing.assert_allclose(center, expected_center, atol=2e-6)
-    assert abs(fixed_predictions[0] - fixed_predictions[1]) > .4
+    # Independently check that the displayed predictions come from straight-line OLS.
+    coefficients = np.linalg.lstsq(np.column_stack((np.ones_like(x), x)), samples[:4].T, rcond=None)[0]
+    np.testing.assert_allclose(fixed_predictions, np.array([1, fixed_x]) @ coefficients)
+    assert 0 < np.ptp(fixed_predictions) < .4
     for number, slide in enumerate(saved.slides, 1):
         visible = [shape.text for shape in slide.shapes if shape.has_text_frame]
         assert f"{number:02d}/08" in visible

@@ -13,7 +13,7 @@ followed by a focus on bias and variance through repeated training.
 
 1. Define a model, underfitting, and overfitting using identical data.
 2. Illustrative training/test loss percentages compare high bias, good fit, and high variance.
-3. The same flexible fitting procedure predicts differently on four training samples.
+3. Linear regression gives slightly different predictions on four training samples.
 4. Eight refits show prediction spread: variance.
 5. Stable straight fits still miss the true relationship: bias.
 6. Quadratic fits are closer to truth and more stable than the flexible fits.
