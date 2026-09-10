@@ -26,6 +26,7 @@ ORANGE = "C65326"
 PURPLE = "7963AF"
 FAINT_PURPLE = "C4B8DC"
 FONT = "Arial"
+NOISE_STD = .4
 
 
 def text(slide, value, x, y, w, h, size=24, color=INK, bold=False):
@@ -153,9 +154,9 @@ def data():
     # Every fit and the loss table share this one noisy quadratic dataset.
     x = np.linspace(-1, 1, 20)
     truth = lambda z: .3 + .4*z + 1.3*z*z
-    y = truth(x) + np.random.default_rng(12).normal(0, .16, len(x))
+    y = truth(x) + np.random.default_rng(12).normal(0, NOISE_STD, len(x))
     xt = np.random.default_rng(41).uniform(-1, 1, 1000)
-    yt = truth(xt) + np.random.default_rng(42).normal(0, .16, len(xt))
+    yt = truth(xt) + np.random.default_rng(42).normal(0, NOISE_STD, len(xt))
     models = [Polynomial.fit(x, y, d) for d in (1, 2, 12)]
     losses = [(float(np.mean((p(x)-y)**2)), float(np.mean((p(xt)-yt)**2))) for p in models]
     return x, y, truth, xt, yt, models, losses
@@ -179,7 +180,7 @@ def build():
         text(s, label, rect[0], 2.65, 3.4, .3, 16)
         plot(s, rect, [(g, model(g), ORANGE, False, 3)], [(x, y, INK, False)])
     legend(s, [("training observations", INK, "dot"), ("fitted model", ORANGE, "line")])
-    note(s, "Ask: Which fit looks convincing, and which would predict new observations well? Pause before naming the concepts. Both models use exactly the same 20 training observations and identical axis limits. They are degree-1 and degree-12 polynomial fits. The underlying relationship is quadratic. Do not reveal the degree-2 good fit yet; it appears in the repeated-sample comparison on slide 4. All examples use x in [-1, 1], independent Gaussian noise with standard deviation 0.16, and arbitrary units. Curves and dots are editable vector objects.")
+    note(s, f"Ask: Which fit looks convincing, and which would predict new observations well? Pause before naming the concepts. Both models use exactly the same 20 training observations and identical axis limits. They are degree-1 and degree-12 polynomial fits. The underlying relationship is quadratic. Do not reveal the degree-2 good fit yet; it appears in the repeated-sample comparison on slide 4. All examples use x in [-1, 1], independent Gaussian noise with standard deviation {NOISE_STD}, and arbitrary units. Curves and dots are editable vector objects.")
 
     s = base(prs, 2, "Too simple to learn the pattern.")
     plot(s, (.98, 2.94, 7.12, 3.10),
@@ -202,7 +203,7 @@ def build():
     s = base(prs, 4, "Change the sample. Fit again.")
     ensembles = [[], [], []]
     for seed in range(20, 28):
-        sample_y = truth(x) + np.random.default_rng(seed).normal(0, .16, len(x))
+        sample_y = truth(x) + np.random.default_rng(seed).normal(0, NOISE_STD, len(x))
         for curves, degree in zip(ensembles, (1, 2, 12)):
             model = Polynomial.fit(x, sample_y, degree)
             curves.append((g, model(g), FAINT_PURPLE, False, 1.25))
@@ -266,7 +267,7 @@ def build():
                     fill.append(color)
                 el.append(fill)
                 tc_pr.append(el)
-    note(s, "All rows are actual computed results on the shared quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation 0.16. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. The degree-1 and degree-12 rows are the frozen models shown on slides 1–3. The degree-2 row is fitted to the same original training set; slide 4 introduced this model family through fresh refits. All rows use identical training and test data. Slides 2 and 3 display only the first 25 test points for readability, while the table evaluates all 1,000.")
+    note(s, f"All rows are actual computed results on the shared quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation {NOISE_STD}. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. The degree-1 and degree-12 rows are the frozen models shown on slides 1–3. The degree-2 row is fitted to the same original training set; slide 4 introduced this model family through fresh refits. All rows use identical training and test data. Slides 2 and 3 display only the first 25 test points for readability, while the table evaluates all 1,000.")
 
     s = base(prs, 7, "Learn the pattern.\nNot the noise.", field=True)
     # Give the two-line closing headline more room than the standard title.
@@ -301,7 +302,9 @@ def build():
     reopened = Presentation(output)
     assert len(reopened.slides) == 7
     saved_table = next(shape.table for shape in reopened.slides[5].shapes if shape.has_table)
-    assert saved_table.cell(2, 3).text == f"{losses[1][1]:.3f}"
+    for row, pair in enumerate(losses, start=1):
+        for column, loss in enumerate(pair, start=2):
+            assert saved_table.cell(row, column).text == f"{loss:.3f}"
     # Check the saved points: shared training panels and identical unseen slides.
     opening_dots = [shape for shape in reopened.slides[0].shapes
                     if shape.name.startswith("Oval")][:2*len(x)]

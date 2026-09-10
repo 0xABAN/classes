@@ -15,8 +15,10 @@ good-fit model family through repeated samples shared across all three degrees.
 Slide 5 is a schematic, not an empirical loss curve. Slide 6 compares measured
 mean squared errors for degrees 1, 2, and 12 on the original training set and
 all 1,000 test points. Slides 2–3 display the first 25 of those test points.
-Seeds are fixed; all examples are synthetic. Notes explain the sampling setup,
-validation/test distinction, and limits of the usual U-shaped curve.
+Seeds are fixed; all examples are synthetic. Gaussian noise has standard
+deviation 0.4 throughout training, testing, and repeated samples. Notes explain
+the sampling setup, validation/test distinction, and limits of the usual
+U-shaped curve.
 
 Visual reference: the saved Copycat `superlogical` profile. Uses Arial, original
 plots, warm paper, dark ink, and a small original gradient accent; no source-site
