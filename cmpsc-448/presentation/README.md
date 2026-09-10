@@ -1,7 +1,7 @@
 # The bias–variance tradeoff
 
-Six minimal slides for CMPSC 448, focused on repeated training rather than
-another introduction to underfitting and overfitting.
+Seven minimal slides for CMPSC 448: a beginner-friendly fitting primer,
+followed by a focus on bias and variance through repeated training.
 
 - **Present:** `bias-variance-tradeoff.pptx` (16:9; editable text, points, and curves).
 - **Backup:** `bias-variance-tradeoff.pdf` (slides only).
@@ -11,12 +11,13 @@ another introduction to underfitting and overfitting.
 
 ## Story
 
-1. The same flexible fitting procedure predicts differently on two training samples.
-2. Eight refits show prediction spread: variance.
-3. Stable straight fits still miss the true relationship: bias.
-4. Quadratic fits are closer to truth and more stable than the flexible fits.
-5. Expected squared prediction error = bias² + variance + noise.
-6. Two questions: is the average prediction off, and how much does retraining change it?
+1. Define a model, underfitting, a good fit, and overfitting using identical data.
+2. The same flexible fitting procedure predicts differently on two training samples.
+3. Eight refits show prediction spread: variance.
+4. Stable straight fits still miss the true relationship: bias.
+5. Quadratic fits are closer to truth and more stable than the flexible fits.
+6. Expected squared prediction error = bias² + variance + noise.
+7. Two questions: is the average prediction off, and how much does retraining change it?
 
 ## Data and interpretation
 
