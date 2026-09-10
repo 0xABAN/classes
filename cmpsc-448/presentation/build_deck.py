@@ -225,7 +225,8 @@ def build():
     text(s, "The lowest training loss doesn’t guarantee the lowest test loss.", .98, 6.15, 11.4, .6, 23)
     note(s, "Loss measures prediction error; lower is better. Training loss is measured on examples used to fit the model. Test loss is measured on separate, unseen examples after training. These percentages are invented teaching values, not results from the plotted regression models. Interpret them as a hypothetical loss normalized by a fixed reference shared across all rows and both columns; they are not percentages of incorrect predictions or accuracy scores. Ordinary mean squared error is not inherently a percentage. The high-bias model performs poorly on both sets. The good fit performs well on both. The high-variance model has the smallest training loss but a much larger test loss, illustrating overfitting. These are typical illustrative patterns, not a way to measure population bias or variance from two scores. In practice, use validation data to choose models and keep the final test set untouched until evaluation. Next, return to the actual synthetic regression data and examine how predictions change across training samples.")
 
-    s = base(prs, 3, "Different training data changes the model")
+    s = base(prs, 3, "High bias, low variance")
+    text(s, "Different training data changes the model", .65, 1.9, 11.5, .35, 18, MUTED)
     fixed_x = .5
     four = [(left, 3.1, 2.3, 2.85) for left in (.98, 4.0, 7.02, 10.04)]
     fixed_predictions = [float(model(fixed_x)) for model in models[1][:4]]
@@ -241,7 +242,8 @@ def build():
     legend(s, [("training observations", INK, "dot"), ("linear regression", ORANGE, "line")], y=6.62)
     note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit ordinary least-squares linear regression, with an intercept and one slope, separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changes the predictions slightly even though the underlying problem does not change. These straight-line fits are relatively stable, illustrating low variance, but they miss the curved relationship: stability alone does not guarantee accuracy. Four samples illustrate the idea; they do not estimate population variance reliably. Next fit a flexible polynomial to these exact same four samples.")
 
-    s = base(prs, 4, "A flexible model changes more with the data")
+    s = base(prs, 4, "High variance, low bias")
+    text(s, "Different training data changes the model", .65, 1.9, 11.5, .35, 18, MUTED)
     polynomial_predictions = [float(model(fixed_x)) for model in models[12][:4]]
     for rect, sample, model, label, prediction in zip(
         four, samples[:4], models[12][:4], ("Sample A", "Sample B", "Sample C", "Sample D"), polynomial_predictions
@@ -253,7 +255,7 @@ def build():
         dot(s, marker_x, marker_y, ORANGE, False, .075)
         text(s, "x = 0.5", marker_x-.38, 6.05, 1, .3, 14, PURPLE)
     legend(s, [("training observations", INK, "dot"), ("degree-12 polynomial", ORANGE, "line")], y=6.62)
-    note(s, f"Keep the exact same samples A through D, axes, and marked input from slide 3. Change only the model family: a degree-12 polynomial can bend much more than a straight line. At x = {fixed_x}, its predictions are {', '.join(f'{value:.2f}' for value in polynomial_predictions)} for A through D. Their spread is larger than the linear-regression predictions at this input. This illustrates sensitivity to training data, not just wiggliness. It does not mean all polynomial models have high variance: the quadratic model we show next is more stable here. Four fits are an illustration, not a precise population estimate. Next compare degree-2 and degree-12 models on eight samples.")
+    note(s, f"Keep the exact same samples A through D, axes, and marked input from slide 3. Change only the model family: a degree-12 polynomial can bend much more than a straight line. At x = {fixed_x}, its predictions are {', '.join(f'{value:.2f}' for value in polynomial_predictions)} for A through D. Their spread is larger than the linear-regression predictions at this input. This illustrates sensitivity to training data, not just wiggliness. Low bias refers to the average over repeated training samples, not every individual curve: this polynomial family contains the true quadratic and is unbiased in expectation under our zero-mean noise and fixed-design least-squares assumptions. It does not mean all polynomial models have high variance: the quadratic model we show next is more stable here. Four fits are an illustration, not a precise population estimate. Next compare degree-2 and degree-12 models on eight samples.")
 
     s = base(prs, 5, "High variance: predictions change a lot")
     for rect, degree, label in zip(two, (2, 12), ("Degree 2  /  less variation", "Degree 12  /  more variation")):
