@@ -11,8 +11,8 @@ followed by a focus on bias and variance through repeated training.
 
 ## Story
 
-1. Define a model, underfitting, a good fit, and overfitting using identical data.
-2. The same flexible fitting procedure predicts differently on two training samples.
+1. Define a model, underfitting, and overfitting using identical data.
+2. The same flexible fitting procedure predicts differently on four training samples.
 3. Eight refits show prediction spread: variance.
 4. Stable straight fits still miss the true relationship: bias.
 5. Quadratic fits are closer to truth and more stable than the flexible fits.

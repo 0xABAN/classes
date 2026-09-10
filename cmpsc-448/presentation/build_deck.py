@@ -30,7 +30,7 @@ PURPLE = "7963AF"
 FAINT_PURPLE = "C4B8DC"
 FONT = "Arial"
 NOISE_STD = .4
-Y_LIMITS = (-.65, 2.45)
+Y_LIMITS = (-.65, 2.6)
 
 
 def text(slide, value, x, y, w, h, size=24, color=INK, bold=False):
@@ -185,33 +185,33 @@ def build():
     large = (.98, 2.94, 7.12, 3.10)
 
     s = base(prs, 1, "A model learns a pattern from examples")
-    primer_panels = [(left, 2.85, 3.35, 2.45) for left in (.98, 5.02, 9.06)]
+    primer_panels = [(left, 2.85, 5.0, 2.45) for left in (.98, 7.12)]
     for rect, degree, label, explanation in zip(
-        primer_panels, (1, 2, 12), ("Underfitting", "Good fit", "Overfitting"),
-        ("Too simple.\nMisses the pattern.", "Learns the pattern,\nnot every point.",
-         "Too flexible.\nChases the noise.")
+        primer_panels, (1, 12), ("Underfitting", "Overfitting"),
+        ("Too simple.\nMisses the pattern.", "Too flexible.\nChases the noise.")
     ):
         text(s, label, rect[0], 2.35, 3.4, .4, 21)
         plot(s, rect, [(g, predictions[degree][0], ORANGE, False, 3)],
              [(x, samples[0], INK, False)])
         text(s, explanation, rect[0], 5.7, 3.5, .8, 19)
     legend(s, [("examples (data)", INK, "dot"), ("learned model", ORANGE, "line")], y=6.62)
-    note(s, "Begin with no assumed machine-learning background. A model is a rule learned from examples so that we can predict an output for a new input. On these graphs, x is the input and y is the output; black dots are observed examples, and the orange line is the model's prediction. Training means choosing the model's parameters using those examples. All three panels use the exact same 20 noisy observations and identical axes. Underfitting means the model is too simple to capture the relationship: this straight line misses the broad curve. The middle model learns that curve without hitting every dot. Overfitting means treating random fluctuations in the training examples as a pattern that will repeat: the flexible curve chases the noise. Noise means unpredictable variation in observations, not necessarily a mistake in the data. These pictures illustrate the concepts; how well a model predicts genuinely new observations is what ultimately matters. Transition: What happens when we train these models on different examples? That is where bias and variance help us understand the errors.")
+    note(s, "Begin with no assumed machine-learning background. A model is a rule learned from examples so that we can predict an output for a new input. On these graphs, x is the input and y is the output; black dots are observed examples, and the orange line is the model's prediction. Training means choosing the model's parameters using those examples. Both panels use the exact same 20 noisy observations and identical axes. Underfitting means the model is too simple to capture the relationship: this straight line misses the broad curve. Overfitting means treating random fluctuations in the training examples as a pattern that will repeat: the flexible curve chases the noise. Noise means unpredictable variation in observations, not necessarily a mistake in the data. These pictures illustrate the concepts; how well a model predicts genuinely new observations is what ultimately matters. Transition: What happens when we train these models on different examples? That is where bias and variance help us understand the errors.")
 
     s = base(prs, 2, "Different training data changes the model")
     fixed_x = .5
-    fixed_predictions = [float(model(fixed_x)) for model in models[12][:2]]
+    four = [(left, 3.1, 2.3, 2.85) for left in (.98, 4.0, 7.02, 10.04)]
+    fixed_predictions = [float(model(fixed_x)) for model in models[12][:4]]
     for rect, sample, model, label, prediction in zip(
-        two, samples[:2], models[12][:2], ("Sample A", "Sample B"), fixed_predictions
+        four, samples[:4], models[12][:4], ("Sample A", "Sample B", "Sample C", "Sample D"), fixed_predictions
     ):
-        text(s, f"{label}  /  prediction {prediction:.2f}", rect[0], 2.65, 4.9, .3, 16)
+        text(s, f"{label}\nprediction {prediction:.2f}", rect[0], 2.35, 2.5, .65, 16)
         plot(s, rect, [(g, model(g), ORANGE, False, 3)], [(x, sample, INK, False)])
         marker_x, marker_y = project(rect, fixed_x, prediction)
         line(s, marker_x, rect[1], marker_x, rect[1]+rect[3], PURPLE, 1, True)
         dot(s, marker_x, marker_y, ORANGE, False, .075)
         text(s, "x = 0.5", marker_x-.38, 6.05, 1, .3, 14, PURPLE)
     legend(s, [("training observations", INK, "dot"), ("degree-12 fit", ORANGE, "line")], y=6.62)
-    note(s, f"Samples A and B come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are two training samples, not training versus test data. Fit the same degree-12 polynomial procedure separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f} and B predicts {fixed_predictions[1]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changed the prediction even though the underlying problem did not change. Two samples illustrate the idea; they do not estimate population variance reliably. We now repeat the experiment eight times.")
+    note(s, f"Samples A through D come from the same quadratic relationship at the same 20 x positions, with independent Gaussian output noise of standard deviation {NOISE_STD}. These are four training samples, not training versus test data. Fit the same degree-12 polynomial procedure separately to each. Keep the inputs, model family, and fitting method fixed. At x = {fixed_x}, A predicts {fixed_predictions[0]:.2f}, B {fixed_predictions[1]:.2f}, C {fixed_predictions[2]:.2f}, and D {fixed_predictions[3]:.2f}. The vertical guides mark that identical input. The orange dots are model predictions, not additional observations. Retraining changed the prediction even though the underlying problem did not change. Four samples illustrate the idea; they do not estimate population variance reliably. We now repeat the experiment eight times.")
 
     s = base(prs, 3, "High variance: predictions change a lot")
     for rect, degree, label in zip(two, (2, 12), ("Degree 2  /  less variation", "Degree 12  /  more variation")):
@@ -219,7 +219,7 @@ def build():
         curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[degree]]
         plot(s, rect, curves + [(g, means[degree], ORANGE, False, 2.8)])
     legend(s, [("one fit per sample", PURPLE, "line"), ("average of 8 fits", ORANGE, "line")])
-    note(s, "Each pale curve is a model fitted to one of eight training samples, including A and B. Every degree sees exactly the same eight samples. The orange curve is the pointwise arithmetic average of those eight predictions, not a ninth fit and not the true relationship. At any fixed input, variance describes the spread of predictions around their average across training samples. The degree-12 procedure is more sensitive here; the degree-2 procedure is more stable. Wiggliness by itself is not the definition of variance, and variance is not the scatter of the raw data. Eight curves are a teaching illustration, not a precise population estimate. Axis limits are identical; curve portions outside the visible range are omitted. Flexibility need not produce high variance in every setting; sample size and regularization also matter.")
+    note(s, "Each pale curve is a model fitted to one of eight training samples, including A through D. Every degree sees exactly the same eight samples. The orange curve is the pointwise arithmetic average of those eight predictions, not a ninth fit and not the true relationship. At any fixed input, variance describes the spread of predictions around their average across training samples. The degree-12 procedure is more sensitive here; the degree-2 procedure is more stable. Wiggliness by itself is not the definition of variance, and variance is not the scatter of the raw data. Eight curves are a teaching illustration, not a precise population estimate. Axis limits are identical; curve portions outside the visible range are omitted. Flexibility need not produce high variance in every setting; sample size and regularization also matter.")
 
     s = base(prs, 4, "High bias: predictions are consistently off")
     curves = [(g, values, FAINT_PURPLE, False, 1.5) for values in predictions[1]]
@@ -287,18 +287,18 @@ def build():
     assert all(slide.has_notes_slide and slide.notes_slide.notes_text_frame.text for slide in saved.slides)
     assert not any(shape.has_table for slide in saved.slides for shape in slide.shapes)
     # Compare saved dots with the exact samples used to fit the opening models.
-    assert np.all((samples[:2] >= Y_LIMITS[0]) & (samples[:2] <= Y_LIMITS[1]))
+    assert np.all((samples[:4] >= Y_LIMITS[0]) & (samples[:4] <= Y_LIMITS[1]))
     dots = [shape for shape in saved.slides[1].shapes if shape.name.startswith("Oval")
-            and shape.fill.fore_color.rgb == RGBColor.from_string(INK)][:40]
-    assert len(dots) == 40
-    expected = [project(rect, a, b) for rect, sample in zip(two, samples[:2])
+            and shape.fill.fore_color.rgb == RGBColor.from_string(INK)][:80]
+    assert len(dots) == 80
+    expected = [project(rect, a, b) for rect, sample in zip(four, samples[:4])
                 for a, b in zip(x, sample)]
     centers = [((shape.left+shape.width/2)/Inches(1),
                 (shape.top+shape.height/2)/Inches(1)) for shape in dots]
     np.testing.assert_allclose(centers, expected, atol=2e-6)
     primer_dots = [shape for shape in saved.slides[0].shapes
-                   if shape.name.startswith("Oval")][:60]
-    assert len(primer_dots) == 60
+                   if shape.name.startswith("Oval")][:40]
+    assert len(primer_dots) == 40
     for index, shape in enumerate(primer_dots):
         rect = primer_panels[index // len(x)]
         expected_center = project(rect, x[index % len(x)], samples[0, index % len(x)])
