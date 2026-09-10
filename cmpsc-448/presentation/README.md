@@ -1,6 +1,6 @@
 # The bias–variance tradeoff
 
-Seven minimal slides for CMPSC 448: a beginner-friendly fitting primer,
+Eight minimal slides for CMPSC 448: a beginner-friendly fitting primer,
 followed by a focus on bias and variance through repeated training.
 
 - **Present:** `bias-variance-tradeoff.pptx` (16:9; editable text, points, and curves).
@@ -12,12 +12,13 @@ followed by a focus on bias and variance through repeated training.
 ## Story
 
 1. Define a model, underfitting, and overfitting using identical data.
-2. The same flexible fitting procedure predicts differently on four training samples.
-3. Eight refits show prediction spread: variance.
-4. Stable straight fits still miss the true relationship: bias.
-5. Quadratic fits are closer to truth and more stable than the flexible fits.
-6. Expected squared prediction error = bias² + variance + noise.
-7. Two questions: is the average prediction off, and how much does retraining change it?
+2. Illustrative training/test loss percentages compare high bias, good fit, and high variance.
+3. The same flexible fitting procedure predicts differently on four training samples.
+4. Eight refits show prediction spread: variance.
+5. Stable straight fits still miss the true relationship: bias.
+6. Quadratic fits are closer to truth and more stable than the flexible fits.
+7. Expected squared prediction error = bias² + variance + noise.
+8. Two questions: is the average prediction off, and how much does retraining change it?
 
 ## Data and interpretation
 
@@ -32,7 +33,12 @@ The generator verifies relative prediction spread, relative squared bias, and
 the finite-ensemble squared-error decomposition. Notes distinguish those
 empirical illustrations from population definitions and explain the independent
 fresh-noise assumption. The noise term in the equation is variance (0.16), not
-standard deviation (0.4). No training/testing loss table remains.
+standard deviation (0.4).
+
+Slide 2's training/test percentages (30/32, 8/10, 1/25) are explicitly
+illustrative, not measured from the graphs. They represent a hypothetical loss
+normalized to a shared fixed reference, not accuracy or ordinary MSE percentages.
+The native editable table illustrates why training loss alone can mislead.
 
 ## Design
 
