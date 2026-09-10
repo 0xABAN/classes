@@ -95,14 +95,12 @@ def gradient():
     return stream
 
 
-def base(prs, n, title, field=False):
+def base(prs, n, title):
     slide = prs.slides.add_slide(prs.slide_layouts[6])
     slide.background.fill.solid()
     slide.background.fill.fore_color.rgb = RGBColor.from_string(PAPER)
-    if field:
-        slide.shapes.add_picture(gradient(), Inches(12.87), Inches(.22), Inches(.24), Inches(7.06))
+    slide.shapes.add_picture(gradient(), Inches(12.87), Inches(.22), Inches(.24), Inches(7.06))
     text(slide, title, .62, 1.05, 12, .8, 38)
-    line(slide, .65, 7.02, 12.65, 7.02)
     text(slide, f"{n:02d}/07", 11.94, 7.12, .75, .22, 11, MUTED)
     return slide
 
@@ -175,7 +173,7 @@ def build():
     # Both unseen-data slides show the same subset of the loss table's test set.
     fresh_x, fresh_y = xt[:25], yt[:25]
 
-    s = base(prs, 1, "Which model would you trust?", field=True)
+    s = base(prs, 1, "Which model would you trust?")
     for rect, model, label in zip(opening_panels, (models[0], models[2]), ("Straight line", "Wiggly curve")):
         text(s, label, rect[0], 2.65, 3.4, .3, 16)
         plot(s, rect, [(g, model(g), ORANGE, False, 3)], [(x, y, INK, False)])
@@ -184,20 +182,20 @@ def build():
 
     s = base(prs, 2, "Too simple to learn the pattern.")
     plot(s, (.98, 2.94, 7.12, 3.10),
-         [(g, truth(g), PURPLE, True, 2), (g, models[0](g), ORANGE, False, 3)],
+         [(g, models[0](g), ORANGE, False, 3)],
          [(fresh_x, fresh_y, PURPLE, True)])
     text(s, "High bias", 8.73, 3.52, 3.8, .7, 30, ORANGE)
     text(s, "A straight line cannot\nlearn this curve.", 8.75, 4.32, 3.65, 1.2, 23)
-    legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line"), ("true pattern", PURPLE, "dash")])
-    note(s, "Keep the straight fit from slide 1 frozen. Reveal the first 25 observations from the independent 1,000-point test set; slide 3 will show exactly these same observations and axis limits. No model is refitted, and there is no distribution shift or extrapolation. The line still misses the curvature. Bias is the systematic difference between the average prediction over repeated training samples and the true regression function. Here the model family only permits straight lines, so even its average fit cannot capture curvature. The dashed curve is known because we generated this example; in practice it is hidden. Underfitting usually leaves substantial error even on training data. More samples alone will not make a straight model quadratic. Linear regression can also use polynomial features: it is the straight-line specification here that is restrictive.")
+    legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line")])
+    note(s, "Keep the straight fit from slide 1 frozen. Reveal the first 25 observations from the independent 1,000-point test set; slide 3 will show exactly these same observations and axis limits. No model is refitted, and there is no distribution shift or extrapolation. The line still misses the curvature. Bias is the systematic difference between the average prediction over repeated training samples and the true regression function. Here the model family only permits straight lines, so even its average fit cannot capture curvature. The true curve is deliberately hidden here, as it would be in practice; only the frozen model and unseen observations are shown. Underfitting usually leaves substantial error even on training data. More samples alone will not make a straight model quadratic. Linear regression can also use polynomial features: it is the straight-line specification here that is restrictive.")
 
     s = base(prs, 3, "Flexible enough to learn the noise.")
     plot(s, (.98, 2.94, 7.12, 3.10),
-         [(g, truth(g), PURPLE, True, 2), (g, models[2](g), ORANGE, False, 3)],
+         [(g, models[2](g), ORANGE, False, 3)],
          [(fresh_x, fresh_y, PURPLE, True)])
     text(s, "High variance", 8.73, 3.52, 4, .7, 30, ORANGE)
     text(s, "Small changes in data.\nBig changes in the fit.", 8.75, 4.32, 3.8, 1.2, 23)
-    legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line"), ("true pattern", PURPLE, "dash")])
+    legend(s, [("unseen observations", PURPLE, "hollow"), ("unchanged model", ORANGE, "line")])
     note(s, "Keep the degree-12 fit from slide 1 frozen and reveal the exact same 25 unseen observations as slide 2. The model was trained on the original 20 points, not these new points. Its wiggles follow noise from training that is not repeated in the test sample. There is no distribution shift or extrapolation. After revealing the good-fit alternative on slide 4, use slide 6 to quantify why the lowest training loss does not guarantee the lowest test loss. Variance means variability of model predictions across possible training datasets, not variability of the input data and not simply a curve looking wiggly. One fit suggests noise-chasing; slide 4 demonstrates sensitivity through repeated samples. Flexibility is not inherently bad: its risk depends on sample size, noise, regularization, and the learning procedure.")
 
     s = base(prs, 4, "Change the sample. Fit again.")
@@ -269,7 +267,7 @@ def build():
                 tc_pr.append(el)
     note(s, f"All rows are actual computed results on the shared quadratic process: y = 0.3 + 0.4x + 1.3x² + noise, with noise standard deviation {NOISE_STD}. Training uses 20 equally spaced x values on [-1, 1]; test uses 1,000 independently drawn uniform x values in that same range and fresh noise. Degrees 1, 2, and 12 were fixed for this demonstration, not selected by searching test loss. Mean squared error is the average of (prediction minus observed y)²; lower is better and units are squared output units. The underfit has relatively high losses on both sets. The degree-2 fit has low, similar losses. Degree 12 achieves the lowest training error, but has higher test error than degree 2. Test loss need not exceed training loss for every finite sample; note that degree 1's test loss is lower here. A single gap does not by itself prove high variance; repeated sampling supplies the conceptual evidence. The degree-1 and degree-12 rows are the frozen models shown on slides 1–3. The degree-2 row is fitted to the same original training set; slide 4 introduced this model family through fresh refits. All rows use identical training and test data. Slides 2 and 3 display only the first 25 test points for readability, while the table evaluates all 1,000.")
 
-    s = base(prs, 7, "Learn the pattern.\nNot the noise.", field=True)
+    s = base(prs, 7, "Learn the pattern.\nNot the noise.")
     # Give the two-line closing headline more room than the standard title.
     for shape in s.shapes:
         if shape.has_text_frame and shape.text == "Learn the pattern.\nNot the noise.":
@@ -324,6 +322,12 @@ def build():
     for number, slide in enumerate(reopened.slides, start=1):
         visible_text = [shape.text for shape in slide.shapes if shape.has_text_frame]
         assert f"{number:02d}/07" in visible_text
+        assert any(shape.left == Inches(12.87) and shape.width == Inches(.24)
+                   for shape in slide.shapes)
+        assert not any(shape.top == Inches(7.02) for shape in slide.shapes)
+        if number in (2, 3):
+            assert "true pattern" not in visible_text
+            assert len(slide._element.xpath(".//a:custGeom")) == 1
         assert not any("BIAS–VARIANCE" in value for value in visible_text)
         assert not any("Two different datasets" in value for value in visible_text)
         for shape in slide.shapes:
