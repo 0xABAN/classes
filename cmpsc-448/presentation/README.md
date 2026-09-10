@@ -1,26 +1,43 @@
 # The bias–variance tradeoff
 
-Seven slides for CMPSC 448. Designed for a short, example-first explanation.
+Seven minimal slides for CMPSC 448, focused on repeated training rather than
+another introduction to underfitting and overfitting.
 
-- **Present:** `bias-variance-tradeoff.pptx` (16:9; editable text, vector plots, and table).
+- **Present:** `bias-variance-tradeoff.pptx` (16:9; editable text, points, and curves).
 - **Backup:** `bias-variance-tradeoff.pdf` (slides only).
-- **Speaker notes:** included on every PowerPoint slide.
-- **Rebuild:** `uv run build_deck.py` regenerates the PowerPoint and runs its checks.
-  Export a new PDF after rebuilding; the script does not update the PDF.
+- **Speaker notes:** included on every slide.
+- **Rebuild:** `uv run build_deck.py` regenerates the PowerPoint and checks its
+  numerical claims and structure. Export a new PDF after rebuilding.
 
-Slide 1 compares straight and wiggly fits on identical training points from
-one quadratic relationship. Slides 2 and 3 keep those fits frozen and show the
-same 25 unseen observations with matching layouts. Slide 4 first reveals the
-good-fit model family through repeated samples shared across all three degrees.
-Slide 5 shows the balanced degree-2 fit on training data and then freezes it
-for evaluation on the same unseen points. Slide 6 compares measured mean
-squared errors for degrees 1, 2, and 12 on the original training set and all
-1,000 test points. Slides 2, 3, and 5 display the first 25 of those test points.
-Seeds are fixed; all examples are synthetic. Gaussian noise has standard
-deviation 0.4 throughout training, testing, and repeated samples. Notes explain
-the sampling setup, generalization, and validation/test distinction.
+## Story
 
-Visual reference: the saved Copycat `superlogical` profile. Uses Arial, original
-plots, warm paper, dark ink, and a small original gradient accent; no source-site
-logos, copy, portraits, or proprietary fonts. Rendered through LibreOffice for
-visual inspection; PowerPoint-specific rendering has not been tested.
+1. Two noisy training samples from the same relationship.
+2. The same flexible fitting procedure predicts differently at one fixed input.
+3. Eight refits show prediction spread: variance.
+4. Stable straight fits still miss the true relationship: bias.
+5. Quadratic fits are closer to truth and more stable than the flexible fits.
+6. Expected squared prediction error = bias² + variance + noise.
+7. Two questions: is the average prediction off, and how much does retraining change it?
+
+## Data and interpretation
+
+The original quadratic relationship and sample A are preserved. All models
+use 20 equally spaced inputs in [-1, 1]; only Gaussian output noise changes
+between samples, with standard deviation 0.4. All model degrees see the same
+eight samples. The plotted orange averages are arithmetic means of eight fits,
+not exact population expectations. Some flexible curves leave the common
+vertical range and are clipped; axes are never rescaled by model.
+
+The generator verifies relative prediction spread, relative squared bias, and
+the finite-ensemble squared-error decomposition. Notes distinguish those
+empirical illustrations from population definitions and explain the independent
+fresh-noise assumption. The noise term in the equation is variance (0.16), not
+standard deviation (0.4). No training/testing loss table remains.
+
+## Design
+
+Inspired by the saved Copycat `superlogical` profile: warm paper, dark ink,
+restrained orange/lavender, and a narrow original gradient on every slide.
+No headers or footer rules; slide numbers remain. Uses Arial and no source-site
+logos, portraits, copy, or proprietary fonts. PDF rendered through LibreOffice;
+PowerPoint-specific rendering has not been tested.
