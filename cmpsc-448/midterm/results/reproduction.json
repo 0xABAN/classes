@@ -1,0 +1,48 @@
+{
+  "verified_at_utc": "2026-10-11T21:03:46.703337+00:00",
+  "verified_commit": "d32888838b23c3eff23d7ae6f6d4071ce2f1d5ba",
+  "source_project_commit": "54527b5",
+  "commands": [
+    "uv run python -m pytest tests -q",
+    "uv run python -m fingerprint.data --cache <checksum-verified UltraFeedback cache>"
+  ],
+  "tests": {
+    "passed": 14,
+    "seconds": 3.22
+  },
+  "dataset": {
+    "rows": 3339,
+    "source_checksums_verified": true,
+    "manifest_byte_identical_to_committed": true,
+    "metadata_byte_identical_to_committed": true,
+    "manifest_sha256": "a19730f2a34aa7687899a7d7d3921417eb5c4d381497b1aef59f8c8ced2efc51",
+    "train_only_vocabulary_reproduced": true,
+    "prompt_overlap_between_splits": 0,
+    "masked_prompt_overlap_between_splits": 0
+  },
+  "metrics": {
+    "complete_training_run_grid": 24,
+    "neural_prediction_sets_recomputed": 60,
+    "baseline_prediction_sets_recomputed": 4,
+    "metrics_checked": [
+      "accuracy",
+      "macro_f1",
+      "confusion_matrix"
+    ],
+    "summary_records_recomputed": 20,
+    "summary_checks": [
+      "mean",
+      "sample_standard_deviation",
+      "summed_confusion_matrix",
+      "prompt_cluster_bootstrap_interval"
+    ],
+    "bootstrap_draws": 2000,
+    "bootstrap_seed": 2026
+  },
+  "limits": [
+    "Training was not rerun during this checkpoint.",
+    "Prediction metrics were recomputed from saved predictions, not regenerated from checkpoints.",
+    "Baseline classifiers were not refitted; their saved predictions were checked.",
+    "Verification is conditional on the pinned dataset and fixed splits."
+  ]
+}
