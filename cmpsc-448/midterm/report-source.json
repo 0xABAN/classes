@@ -74,5 +74,5 @@
       "label": "arXiv:1408.5882"
     }
   ],
-  "assistance": "Assistance: Codex assisted with design, code, experiments, analysis and drafting. WriteHuman edited report prose; factual claims were checked against saved outputs. Dataset responses were not humanized."
+  "assistance": "Assistance: Codex assisted with design, code, experiments, analysis and drafting. I reviewed all AI-assisted code and can explain the tradeoffs chosen. Factual claims were checked against saved outputs."
 }

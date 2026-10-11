@@ -10,5 +10,5 @@
   "pdf_visual_check": "all three pages rendered and inspected; no clipping, overlap, missing glyphs, or broken tables",
   "completed_training_runs": 24,
   "saved_metrics_recomputed": "every held-out accuracy, macro-F1, and confusion matrix matches its saved predictions",
-  "report_sha256": "2fde183ea3bdfc12ae77ea5b469faef68dd83b9abdc4e18f9d720f77097c3071"
+  "report_sha256": "1c2ddfd743b6d9ebb48ebeb984d85e4ee4393ead3ad8a5fa73a00015900f3448"
 }

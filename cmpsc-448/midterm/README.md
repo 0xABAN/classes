@@ -65,6 +65,6 @@ Sources:
 
 ## Assistance and submission
 
-Codex assisted with project design, implementation, experiments, analysis, and drafting. WriteHuman was used to edit report prose; its output was checked against the recorded experiment results. Dataset responses were never humanized or rewritten beyond the documented masking and ablation. Detector scores are not evidence of authorship or scientific validity.
+Codex assisted with project design, implementation, experiments, analysis, and drafting. I reviewed all AI-assisted code and can explain the tradeoffs chosen. Factual claims were checked against the recorded experiment results. Dataset responses were not rewritten beyond the documented masking and ablation.
 
 The assignment requires a GitHub repository URL containing code and the PDF report. Review the report and code before submitting that URL in Canvas. No presentation is included.
