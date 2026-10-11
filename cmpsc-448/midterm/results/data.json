@@ -1,0 +1,27 @@
+{
+  "source_urls": {
+    "evol_instruct": "https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/40b436560ca83a8dba36114c22ab3c66e43f6d5e/evol_instruct.jsonl",
+    "ultrachat": "https://huggingface.co/datasets/openbmb/UltraFeedback/resolve/40b436560ca83a8dba36114c22ab3c66e43f6d5e/ultrachat.jsonl"
+  },
+  "sha256": {
+    "evol_instruct": "1845a636816a6e713ca8f508372d4386cb82c8864b047da89c57ed9d1e3fa76a",
+    "ultrachat": "1955e9268ae30eeb414068c2fe482def21a76cbfa6b0a63f4319a8ab19f900ff"
+  },
+  "models": [
+    "gpt-4",
+    "llama-2-70b-chat",
+    "falcon-40b-instruct"
+  ],
+  "counts": {
+    "train": 2400,
+    "val": 450,
+    "test": 396,
+    "game": 93
+  },
+  "unique_prompts": {
+    "train": 2318,
+    "val": 434,
+    "test": 132,
+    "game": 78
+  }
+}

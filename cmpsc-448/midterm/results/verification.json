@@ -1,0 +1,14 @@
+{
+  "tests_passed": 14,
+  "prompt_overlap_between_splits": 0,
+  "manifest_sha256": "a19730f2a34aa7687899a7d7d3921417eb5c4d381497b1aef59f8c8ced2efc51",
+  "manifest_regeneration": "byte-identical after fresh preparation from checksum-verified source files",
+  "checkpoint_prediction_checks": {
+    "cnn_output_11": "all test and game predictions exactly match saved records",
+    "lstm_output_11": "all test and game predictions exactly match saved records"
+  },
+  "pdf_visual_check": "all three pages rendered and inspected; no clipping, overlap, missing glyphs, or broken tables",
+  "completed_training_runs": 24,
+  "saved_metrics_recomputed": "every held-out accuracy, macro-F1, and confusion matrix matches its saved predictions",
+  "report_sha256": "2fde183ea3bdfc12ae77ea5b469faef68dd83b9abdc4e18f9d720f77097c3071"
+}
