@@ -1,0 +1,31 @@
+{
+  "process": "Writing skill draft, full WriteHuman pass, factual audit, four section passes, factual repairs, final detector check",
+  "full_pass_rejected": true,
+  "reasons": [
+    "Changed model names and experimental settings",
+    "Corrupted numerical results and research-question mapping",
+    "Invented claims and dropped required terms"
+  ],
+  "repairs": [
+    "Restored all generator labels, sample sizes, settings, and numerical results",
+    "Corrected the prompt-only chance argument and dataset-subset descriptions",
+    "Removed invented claims about new information after formatting removal",
+    "Kept dataset responses and numerical tables outside humanization"
+  ],
+  "final_prose_score": {
+    "human_probability": 0.9325,
+    "ai_probability": 0.0002,
+    "classification": "human",
+    "version": "txtdetect_joint_20261006_2202_sr1",
+    "scan_id": "20261011S7EY2KLA",
+    "class_probabilities": {
+      "ai": 0.00016639434034004807,
+      "human": 0.9325000643730164,
+      "mixed": 0.06733351945877075
+    },
+    "language": "English",
+    "sentences": null
+  },
+  "caveat": "Detector scores are not evidence of authorship or factual correctness. The report discloses AI assistance.",
+  "data_humanized": false
+}
