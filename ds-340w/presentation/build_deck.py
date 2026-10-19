@@ -108,13 +108,13 @@ def build():
 
     slide, item = deck.slides[1], content["slides"][1]
     for i, paper in enumerate(item["papers"]):
-        y = 2.25 + i * 1.25
+        y = 2.15 + i * 1.35
         text(slide, paper["name"], .98, y, 3, .45, 25, PURPLE, link=paper["url"])
         text(slide, paper["venue"], .98, y + .48, 3, .3, 16, MUTED)
-        text(slide, paper["idea"], 4.35, y, 7.7, .45, 25)
-        text(slide, paper["transfer"], 4.35, y + .50, 7.7, .4, 20, MUTED)
+        text(slide, paper["idea"], 4.35, y, 7.7, .75, 22)
+        text(slide, paper["transfer"], 4.35, y + .83, 7.7, .36, 18, MUTED)
         if i < 2:
-            rule(slide, .98, y + 1.03, 11.1)
+            rule(slide, .98, y + 1.25, 11.1)
     text(slide, item["takeaway"], .98, 6.38, 11.3, .55, 19)
 
     slide, item = deck.slides[2], content["slides"][2]
