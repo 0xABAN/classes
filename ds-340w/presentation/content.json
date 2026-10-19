@@ -1,0 +1,15 @@
+{
+  "timing_seconds": [100, 130, 70, 120, 120, 60],
+  "slides": [
+    {"title": "Training AI to Pixelate with Code", "subtitle": "Team 7 · Adam Torres Encarnacion", "goal": "Make a drawing. Keep the code editable.", "before": "Original", "after": "Change the color, keep the shape", "caption": "Working reference example, not model output", "outline": "Problem + parent papers: 5 min · Method + evaluation: 5 min"},
+    {"title": "Three papers, one proposed workflow", "papers": [
+      {"name": "AutomaTikZ", "venue": "ICLR 2024", "idea": "Generate editable graphics code", "transfer": "Keep code with its rendered image", "url": "https://proceedings.iclr.cc/paper_files/paper/2024/hash/f7641940c7dd9e5de58c20e39586eb64-Abstract-Conference.html"},
+      {"name": "Text2Reward", "venue": "ICLR 2024", "idea": "Write inspectable reward code", "transfer": "Make technical checks explicit", "url": "https://text-to-reward.github.io/"},
+      {"name": "Diffusion-DPO", "venue": "CVPR 2024", "idea": "Learn from preferred image pairs", "transfer": "Compare pictures; train on code", "url": "https://arxiv.org/abs/2311.12908"}
+    ], "takeaway": "These papers motivate the project. They do not prove it works for pixel art."},
+    {"title": "A good-looking picture can still be wrong", "question": "Will preference tuning improve pixel art\nwithout breaking the code or simple edits?", "left_label": "Appealing, but the wrong color", "right_label": "Correct color and readable shape", "prompt": "Request: a red mushroom", "caption": "Illustrative reference programs, not a model comparison", "hypothesis": "Hypothesis: people prefer tuned outputs, with validity and editability preserved."},
+    {"title": "Learn from the picture; update the code model", "model": "Qwen2.5-Coder-7B-Instruct", "steps": ["Two programs", "Render + check", "Human choice", "Token-level DPO"], "details": ["Same prompt", "Log invalid code", "Keep both programs", "LoRA + frozen reference"], "takeaway": "Use language-model DPO, not a diffusion denoising loss.", "status": "Implemented: renderer, checks, and pair export. Training is proposed."},
+    {"title": "A small dataset with a held-out comparison", "count": "120 prompts", "split": "100 train / 20 test", "description": "5 objects × 6 colors × 4 positions", "canvas": "32 × 32 canvas · fixed scene splits", "baseline": "Base model vs. preference-tuned model", "comparison": "20 test prompts × 3 seeds = 60 comparisons", "metrics": ["Valid code + prompt compliance", "Human preference + appearance", "Recolor without moving other pixels"], "warning": "Count invalid outputs. Keep test references out of training."},
+    {"title": "Better drawings, with code worth keeping", "targets": ["≥95% valid programs", "≥60% preference credit"], "caveat": "Proposed targets, not results. Report ties and uncertainty.", "ready": "Ready: dataset, renderer, checks, and demo", "next": "Next: label pairs → train adapter → test", "repo_label": "Project code", "data_label": "Dataset", "repo_url": "https://github.com/0xABAN/classes/tree/main/ds-340w", "data_url": "https://github.com/0xABAN/classes/blob/main/ds-340w/data/prompts.jsonl"}
+  ]
+}

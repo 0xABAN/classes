@@ -1,0 +1,9 @@
+[project]
+name = "pixelcode-pilot"
+version = "0.1.0"
+description = "A reproducible pilot for learning editable pixel-art programs."
+requires-python = ">=3.12"
+dependencies = ["pillow>=11,<13"]
+
+[dependency-groups]
+presentation = ["python-pptx>=1.0,<2"]

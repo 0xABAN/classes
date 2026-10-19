@@ -1,0 +1,851 @@
+{
+  "source": "hand_authored_reference_programs",
+  "purpose": "renderer_and_metric_smoke_test_not_model_performance",
+  "n": 120,
+  "valid_rate": 1.0,
+  "palette_rate": 1.0,
+  "placement_rate": 1.0,
+  "details": [
+    {
+      "id": "mushroom-red-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-red-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-red-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-red-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-orange-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-orange-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-orange-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-orange-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-green-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-green-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-green-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-green-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-blue-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-blue-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-blue-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-blue-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-purple-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-purple-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-purple-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-purple-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-teal-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-teal-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-teal-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "mushroom-teal-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-red-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-red-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-red-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-red-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-orange-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-orange-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-orange-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-orange-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-green-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-green-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-green-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-green-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-blue-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-blue-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-blue-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-blue-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-purple-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-purple-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-purple-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-purple-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-teal-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-teal-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-teal-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "tree-teal-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-red-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-red-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-red-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-red-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-orange-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-orange-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-orange-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-orange-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-green-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-green-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-green-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-green-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-blue-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-blue-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-blue-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-blue-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-purple-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-purple-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-purple-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-purple-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-teal-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-teal-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-teal-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "house-teal-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-red-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-red-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-red-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-red-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-orange-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-orange-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-orange-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-orange-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-green-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-green-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-green-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-green-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-blue-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-blue-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-blue-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-blue-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-purple-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-purple-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-purple-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-purple-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-teal-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-teal-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-teal-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "boat-teal-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-red-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-red-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-red-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-red-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-orange-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-orange-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-orange-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-orange-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-green-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-green-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-green-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-green-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-blue-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-blue-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-blue-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-blue-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-purple-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-purple-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-purple-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-purple-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-teal-top-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-teal-top-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-teal-bottom-left",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    },
+    {
+      "id": "heart-teal-bottom-right",
+      "valid": true,
+      "palette_ok": true,
+      "placement_ok": true,
+      "error": null
+    }
+  ],
+  "recolor_check": true
+}
