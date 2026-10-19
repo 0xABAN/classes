@@ -10,6 +10,27 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class PresentationTests(unittest.TestCase):
+    def test_method_and_evaluation_slides_omit_removed_captions(self):
+        removed = {
+            4: [
+                "Implemented: renderer, checks, and pair export. Training is proposed.",
+                "Use language-model DPO, not a diffusion denoising loss.",
+                "Token-level DPO",
+            ],
+            5: ["Count invalid outputs. Keep test references out of training."],
+            6: ["Next: label pairs → train adapter → test"],
+        }
+        ns = {"a": "http://schemas.openxmlformats.org/drawingml/2006/main"}
+        with ZipFile(ROOT / "presentation/training-ai-to-pixelate.pptx") as package:
+            for number, captions in removed.items():
+                slide = ET.fromstring(package.read(f"ppt/slides/slide{number}.xml"))
+                labels = [node.text or "" for node in slide.findall(".//a:t", ns)]
+                for caption in captions:
+                    with self.subTest(slide=number, caption=caption):
+                        self.assertNotIn(caption, labels)
+                if number == 4:
+                    self.assertIn("DPO", labels)
+
     def test_parent_papers_have_read_aloud_summaries(self):
         content = json.loads((ROOT / "presentation/content.json").read_text())
         papers = content["slides"][1]["papers"]

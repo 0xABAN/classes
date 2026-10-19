@@ -136,8 +136,6 @@ def build():
         text(slide, detail, x, 4.94, 2.6, .85, 18, MUTED)
         if i < 3:
             text(slide, "→", x + 2.45, 3.22, .4, .5, 22, MUTED)
-    text(slide, item["takeaway"], .98, 6.13, 11.2, .5, 22)
-    text(slide, item["status"], .98, 6.83, 10.8, .35, 13, MUTED)
 
     slide, item = deck.slides[4], content["slides"][4]
     text(slide, item["count"], .98, 2.35, 5, .65, 37, PURPLE)
@@ -148,14 +146,12 @@ def build():
     text(slide, item["comparison"], 6.9, 3.45, 5.2, .8, 21, PURPLE)
     for i, label in enumerate(item["metrics"]):
         text(slide, label, 6.9, 4.48 + i*.65, 5.2, .5, 18)
-    text(slide, item["warning"], .98, 6.52, 11.2, .55, 20)
 
     slide, item = deck.slides[5], content["slides"][5]
     for i, target in enumerate(item["targets"]):
         text(slide, target, .98 + i*6, 2.4, 5.6, .65, 32, ORANGE if i == 0 else PURPLE)
     text(slide, item["caveat"], .98, 3.35, 11.2, .45, 19, MUTED)
     text(slide, item["ready"], .98, 4.25, 11, .5, 25)
-    text(slide, item["next"], .98, 5.02, 11, .5, 25)
     text(slide, item["repo_label"], .98, 6.22, 3, .4, 20, PURPLE, link=item["repo_url"])
     text(slide, item["data_label"], 5.2, 6.22, 3, .4, 20, PURPLE, link=item["data_url"])
     text(slide, "github.com/0xABAN/classes/tree/main/ds-340w", .98, 6.80, 10.7, .32, 14, MUTED,
