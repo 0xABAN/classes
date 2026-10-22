@@ -1,0 +1,111 @@
+{
+  "completed_at_utc": "2026-10-22T13:04:02.472167+00:00",
+  "pretrained_weights": false,
+  "seed": 448,
+  "device": "cpu",
+  "torch_version": "2.14.1",
+  "config": {
+    "vocab_size": 68,
+    "width": 128,
+    "heads": 4,
+    "layers": 3,
+    "context": 128,
+    "dropout": 0.1
+  },
+  "parameters": 628932,
+  "steps_completed": 3000,
+  "batch_size": 24,
+  "seconds": 484.25795258395374,
+  "optimizer": "AdamW",
+  "weight_decay": 0.01,
+  "learning_rate_peak": 0.001,
+  "learning_rate_floor": 0.0001,
+  "warmup_steps": 100,
+  "gradient_clip": 1.0,
+  "best_step": 3000,
+  "best_validation_loss": 1.3119690418243408,
+  "best_validation_perplexity": 3.7134785126264465,
+  "evaluation": "Fixed random validation windows; used for checkpoint selection, not an independent test",
+  "evaluation_batches": 16,
+  "data": {
+    "title": "The Wonderful Wizard of Oz",
+    "author": "L. Frank Baum",
+    "source_url": "https://www.gutenberg.org/cache/epub/55/pg55.txt",
+    "source_sha256": "969bffab7740d4d8a0bac332d78bd0152ad4a40a2efc52f06c74a9bb6120be75",
+    "story_sha256": "3f89029465f60198d05083741aff6fff30e9d6cc26f751fa7cbeb29a3623b322",
+    "characters": 205395,
+    "words": 39272,
+    "train_characters": 184855,
+    "validation_characters": 20540,
+    "split": "Contiguous first 90% training; final 10% validation, before window sampling",
+    "vocabulary_size": 68,
+    "vocabulary_fitted_on": "training only"
+  },
+  "history": [
+    {
+      "step": 0,
+      "train_loss": 4.287858843803406,
+      "validation_loss": 4.28698468208313
+    },
+    {
+      "step": 250,
+      "train_loss": 2.2308714985847473,
+      "validation_loss": 2.271750956773758
+    },
+    {
+      "step": 500,
+      "train_loss": 1.7068571150302887,
+      "validation_loss": 1.7822990715503693
+    },
+    {
+      "step": 750,
+      "train_loss": 1.4935164377093315,
+      "validation_loss": 1.6140199080109596
+    },
+    {
+      "step": 1000,
+      "train_loss": 1.3847041502594948,
+      "validation_loss": 1.5257377848029137
+    },
+    {
+      "step": 1250,
+      "train_loss": 1.2937200739979744,
+      "validation_loss": 1.4565077126026154
+    },
+    {
+      "step": 1500,
+      "train_loss": 1.2229271233081818,
+      "validation_loss": 1.3954585418105125
+    },
+    {
+      "step": 1750,
+      "train_loss": 1.1725948303937912,
+      "validation_loss": 1.3667516335844994
+    },
+    {
+      "step": 2000,
+      "train_loss": 1.1292851194739342,
+      "validation_loss": 1.3428096398711205
+    },
+    {
+      "step": 2250,
+      "train_loss": 1.0897843837738037,
+      "validation_loss": 1.3310561776161194
+    },
+    {
+      "step": 2500,
+      "train_loss": 1.0652339532971382,
+      "validation_loss": 1.3228759691119194
+    },
+    {
+      "step": 2750,
+      "train_loss": 1.0453935787081718,
+      "validation_loss": 1.3155808970332146
+    },
+    {
+      "step": 3000,
+      "train_loss": 1.0338962189853191,
+      "validation_loss": 1.3119690418243408
+    }
+  ]
+}

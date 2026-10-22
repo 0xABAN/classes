@@ -1,0 +1,30 @@
+{
+  "untrained": {
+    "prompt": "Dorothy said",
+    "output": "Dorothy saidE??tKVJB\u2019qxdDTT\u2018Q(mA\u201dvB\u201c W(qxXgz(DA-q\u2019hX)A\u201c?qP(KxqQs\u201cUGPqgJ)\u201c;)ioX()Zj;o,BqrJHYfrq\u201dD\n?NGmEg(QwpJ\u2018sX\u201cqqU\u2019q\u201c\u2018mZ?(,rKvyj;YUUqqs!mxsk)q)U(qg-Boz,?H(qBOgg\nE?)hskWoT?)qB(\u201cqWfpW(W).A,,W(D-Ai?NsZBkjsqU((,BhHi"
+  },
+  "trained": [
+    {
+      "prompt": "Dorothy said",
+      "output": "Dorothy said:\n\n\u201cDon\u2019t I should get to this, and I should crow that the Woodman side of\nthe Woodman were a great first, and touble a piece at down on of the read of\ndoor and said the Tin Woodman, and they could no"
+    },
+    {
+      "prompt": "The Scarecrow",
+      "output": "The Scarecrow stood upon the wonderful and\nclothed upon the first first and house beside he work to the little horses\nand get basket all stooding and green marble dark she crows stuffed his\ncountry and so looked h"
+    },
+    {
+      "prompt": "The Wizard of Oz",
+      "output": "The Wizard of Oz, \u201cI am think now what you\nagain.\u201d\n\nThe Scarecrow was she was nose who had been sently long through me all\nthe meer.\u201d\n\n\u201cWhy nothing pass in the rest,\u201d said Dorothy.\n\n\u201cWhat is cross well ask for you,\u201d "
+    },
+    {
+      "prompt": "Once upon a time",
+      "output": "Once upon a time to a room.\u201d\n\nThe corner studdenly that the lay and heart, and soon by they carry\narms the air and time been they could not do asfor the Emerald City.\n\n\u201cHow?\u201d asked Dorothy.\n\n\u201cWhat is the Great Witch?"
+    }
+  ],
+  "settings": {
+    "seed": 42,
+    "temperature": 0.8,
+    "top_k": 20,
+    "new_characters": 200
+  }
+}
