@@ -1,0 +1,14 @@
+{
+  "title": "The Wonderful Wizard of Oz",
+  "author": "L. Frank Baum",
+  "source_url": "https://www.gutenberg.org/cache/epub/55/pg55.txt",
+  "source_sha256": "969bffab7740d4d8a0bac332d78bd0152ad4a40a2efc52f06c74a9bb6120be75",
+  "story_sha256": "3f89029465f60198d05083741aff6fff30e9d6cc26f751fa7cbeb29a3623b322",
+  "characters": 205395,
+  "words": 39272,
+  "train_characters": 184855,
+  "validation_characters": 20540,
+  "split": "Contiguous first 90% training; final 10% validation, before window sampling",
+  "vocabulary_size": 68,
+  "vocabulary_fitted_on": "training only"
+}
