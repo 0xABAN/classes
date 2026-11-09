@@ -1,0 +1,15 @@
+\documentclass{standalone}
+
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+
+\begin{document}
+\begin{tikzpicture}
+  \node[circle, draw] (a) {A};
+  \node[circle, draw, right=of a] (b) {B};
+  \node[circle, draw, right=of b] (c) {C};
+
+  \draw[->] (a) -- (b);
+  \draw[->] (b) -- (c);
+\end{tikzpicture}
+\end{document}

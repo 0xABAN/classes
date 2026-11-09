@@ -1,0 +1,8 @@
+{
+  "model": "nllg/tikz-clima-7b",
+  "seed": 7,
+  "prompt": "A simple directed graph with three circular nodes labeled A, B, and C, and arrows from A to B and from B to C.",
+  "elapsed_seconds": 274.96,
+  "gpu": "NVIDIA A40",
+  "generated_characters": 311
+}
