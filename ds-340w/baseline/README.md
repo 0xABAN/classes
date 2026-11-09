@@ -36,3 +36,14 @@ The prompt asks for three circular nodes and two directed edges. The rendered re
 ## Parent paper
 
 [AutomaTikZ: Text-Guided Synthesis of Scientific Vector Graphics with TikZ (ICLR 2024)](https://openreview.net/forum?id=v3K5TVP8kZ), by Jonas Belouadi, Anne Lauscher, and Steffen Eger. [Paper PDF](https://arxiv.org/pdf/2310.00367).
+
+## Background recording
+
+`record_rex.py` captures one explicitly selected Rex terminal block at two frames per second and renders an MP4. It does not capture the desktop or switch focus. Local dependencies are Pillow, FFmpeg, and the Rex CLI.
+
+```sh
+python record_rex.py --session SESSION --block BLOCK \
+  --output demo.mp4 --state recording-state --font /System/Library/Fonts/Menlo.ttc
+```
+
+Use a fresh state directory for each recording. The recorder creates `ready` when capture starts; the demo process should wait for it before running. Create `done` after the demo finishes to close the video. If the demo saves `result.png` in that directory, the recorder displays it above the terminal output. The directory also contains timestamped terminal captures and a preview frame for inspection. The recording stops with an error after 30 minutes if `done` never appears.
